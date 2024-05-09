@@ -14,7 +14,8 @@ mongoose.connect(process.env.DB, { useNewUrlParser: true, useUnifiedTopology: tr
 
 
 // Configuração de CORS
-app.use(cors({ // Permitir apenas requisições desta origem
+app.use(cors({
+    origin: '*', // Permitir apenas requisições desta origem
     credentials: true
 }));
 
