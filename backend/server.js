@@ -7,13 +7,15 @@ const app = express();
 const port = process.env.PORT || 3000;
 const cors = require('cors');
 
+require('dotenv').config(); // Certifique-se de carregar as variáveis de ambiente
+
 // Conexão com o MongoDB
-mongoose.connect('mongodb+srv://admin:OJwkZsJFmw8HMxr9@mdiniz.ktzbflu.mongodb.net/?retryWrites=true&w=majority&appName=mdiniz', {
+mongoose.connect(process.env.DB, { // Usando a variável de ambiente
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
 
-// Ou, para configurar de forma mais específica:
+// Configuração de CORS
 app.use(cors({
     origin: 'http://localhost:5173' // Permitir apenas requisições desta origem
 }));

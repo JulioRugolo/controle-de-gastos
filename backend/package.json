@@ -4,7 +4,8 @@
   "description": "Backend avançado para app de agendamento",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
