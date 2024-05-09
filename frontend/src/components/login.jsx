@@ -10,7 +10,7 @@ function LoginForm() {
   const handleLogin = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post('mdiniz-studio.railway.internal/api/users/login', {
+      const response = await axios.post('https://mdiniz-studio-production-3796.up.railway.app/api/users/login', {
         username,
         password
       });
