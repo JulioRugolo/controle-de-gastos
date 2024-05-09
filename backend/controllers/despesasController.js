@@ -3,9 +3,10 @@ const Despesa = require('../models/Despesa');
 // Controlador para adicionar despesa
 exports.adicionarDespesa = async (req, res) => {
   try {
-    const { descricao, valor } = req.body;
+    const { lugar, valor, data, categoria } = req.body;
+    const quemGastou = req.usuario.id; // Assumindo que req.usuario.id contém o ID do usuário logado
     // Crie a despesa
-    const despesa = await Despesa.create({ descricao, valor });
+    const despesa = await Despesa.create({ lugar, valor, data, quemGastou, categoria });
     return res.status(201).json({ success: true, data: despesa });
   } catch (error) {
     console.error('Erro ao adicionar despesa:', error);

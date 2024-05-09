@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const despesaSchema = new mongoose.Schema({
-  descricao: {
+  lugar: {
     type: String,
     required: true
   },
@@ -11,9 +11,17 @@ const despesaSchema = new mongoose.Schema({
   },
   data: {
     type: Date,
-    default: Date.now
+    required: true
   },
-  // Adicione outros campos conforme necessário
+  quemGastou: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Usuario',
+    required: true
+  },
+  categoria: {
+    type: String,
+    required: true
+  }
 });
 
 const Despesa = mongoose.model('Despesa', despesaSchema);
