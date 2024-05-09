@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import './login.css'; // Importar o arquivo CSS
 
 function LoginForm() {
   const [username, setUsername] = useState('');
@@ -15,8 +16,6 @@ function LoginForm() {
         password
       });
       if (response.data.token) {
-        console.log('Login bem-sucedido! Token:', response.data.token);
-        // Armazenar o token no localStorage ou em cookies
         localStorage.setItem('token', response.data.token);
         // Redirecionar para a página de dashboard
         navigate('/dashboard');
@@ -30,21 +29,24 @@ function LoginForm() {
   };
 
   return (
-    <form onSubmit={handleLogin}>
-      <input
-        type="text"
-        value={username}
-        onChange={e => setUsername(e.target.value)}
-        placeholder="Username"
-      />
-      <input
-        type="password"
-        value={password}
-        onChange={e => setPassword(e.target.value)}
-        placeholder="Password"
-      />
-      <button type="submit">Login</button>
-    </form>
+    <>
+    <h1 className='title'>Login</h1>
+      <form className="form-container" onSubmit={handleLogin}>
+        <input
+          type="text"
+          value={username}
+          onChange={e => setUsername(e.target.value)}
+          placeholder="Username"
+        />
+        <input
+          type="password"
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+          placeholder="Password"
+        />
+        <button type="submit">Login</button>
+      </form>
+    </>
   );
 }
 

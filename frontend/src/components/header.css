@@ -1,0 +1,29 @@
+/* header.css */
+
+/* Estilos gerais */
+/* Define estilos para dispositivos pequenos */
+@media (max-width: 767px) {
+    /* Estilos para o menu no modo mobile */
+    .lg\:hidden {
+      display: none;
+    }
+    .lg\:flex {
+      display: flex;
+    }
+    .lg\:inline-block {
+      display: inline-block;
+    }
+    .lg\:px-4 {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+  
+  /* Estilos para dispositivos maiores */
+  @media (min-width: 768px) {
+    /* Define estilos para o menu no modo desktop */
+    .lg\:hidden {
+      display: block;
+    }
+  }
+  

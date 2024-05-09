@@ -1,0 +1,45 @@
+/* Estilos para desktop e dispositivos móveis */
+.form-container {
+    max-width: 400px;
+    margin: auto; /* Centraliza horizontalmente */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centraliza verticalmente */
+    height: 50vh; /* Define a altura para ocupar toda a altura da página */
+  }
+  
+  .form-container input,
+  .form-container button {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+  }
+  
+  .form-container button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+
+  .title {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-top: 20px;
+}
+  
+  /* Estilos para dispositivos móveis */
+  @media screen and (max-width: 767px) {
+
+    .title {
+        font-size: 2rem;
+        font-weight: bold;
+        margin-top: 20px;
+    }
+    .form-container {
+      padding: 20px;
+      height: 50vh;
+      font-size: 16px;
+    }
+  }
+  
