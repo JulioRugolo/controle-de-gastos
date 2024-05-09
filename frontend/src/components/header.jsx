@@ -1,52 +1,63 @@
-// Importe useState e useEffect do React
 import { useState, useEffect } from 'react';
-// Importe os ícones do menu
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 
-// Componente do cabeçalho
 const Header = () => {
-  // State para gerenciar a visibilidade da barra de navegação
   const [isMobile, setIsMobile] = useState(false);
   const [navOpen, setNavOpen] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false); // Adicione o estado para controlar se o usuário está logado
 
-  // Função para lidar com a alternância da barra de navegação
-  const handleNavToggle = () => {
-    setNavOpen(!navOpen);
-  };
-
-  // Efeito para verificar o tamanho da tela e definir isMobile
   useEffect(() => {
-    // Função para lidar com o redimensionamento da tela
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
     };
 
-    // Adiciona o event listener para o redimensionamento da tela
     window.addEventListener('resize', handleResize);
-
-    // Executa handleResize inicialmente
     handleResize();
 
-    // Remove o event listener quando o componente é desmontado
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Renderiza os itens da barra de navegação
+  useEffect(() => {
+    // Verifica se há um token armazenado no localStorage
+    const token = localStorage.getItem('token');
+    setLoggedIn(!!token); // Define loggedIn como verdadeiro se houver um token
+
+    // Função para verificar se o usuário está logado
+    const checkLoggedIn = () => {
+      const token = localStorage.getItem('token');
+      setLoggedIn(!!token);
+    };
+
+    // Adiciona um event listener para verificar se o usuário está logado ao fazer login/logout
+    window.addEventListener('storage', checkLoggedIn);
+
+    return () => window.removeEventListener('storage', checkLoggedIn);
+  }, []);
+
+  const handleNavToggle = () => {
+    setNavOpen(!navOpen);
+  };
+
+  const handleLogout = () => {
+    // Remove o token do localStorage
+    localStorage.removeItem('token');
+    // Atualiza o estado loggedIn para false
+    setLoggedIn(false);
+  };
+
   const renderNavItems = () => (
     <>
       <a href='/'>Home</a>
       <a href='/gastos'>Gastos</a>
       <a href='/adicionar-despesa'>Adicionar despesa</a>
       <a href='/buscar'>Buscar Despesa</a>
-      <a href='/login'>Login</a>
-      <a href='/register'>Registrar</a>
+      {!loggedIn ? <a href='/login'>Login</a> : <a href='#' onClick={handleLogout}>Logout</a>}
+      {!loggedIn && <a href='/register'>Registrar</a>}
     </>
   );
 
-  // Renderiza o componente de cabeçalho
   return (
     <div className='nav-container'>
-      {/* Ícone de navegação móvel */}
       {isMobile && (
         <div className='mobile-toggle'>
           <button onClick={handleNavToggle}>
@@ -56,14 +67,11 @@ const Header = () => {
           </button>
         </div>
       )}
-  
-      {/* Navegação para desktop */}
+
       {!isMobile && renderNavItems()}
-  
-      {/* Menu de navegação móvel */}
+
       {isMobile && navOpen && (
         <ul className='mobile-nav'>
-          {/* Itens de navegação móvel */}
           {renderNavItems()}
         </ul>
       )}

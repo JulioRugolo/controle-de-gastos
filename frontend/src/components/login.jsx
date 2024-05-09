@@ -2,6 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './login.css'; // Importar o arquivo CSS
+import Swal from 'sweetalert2'
 
 function LoginForm() {
   const [username, setUsername] = useState('');
@@ -21,10 +22,18 @@ function LoginForm() {
         navigate('/dashboard');
       } else {
         // Tratar erro de login
-        console.error('Login falhou!');
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Dados incorretos, tente novamente!",
+        });
       }
     } catch (error) {
-      console.error('Erro de login:', error.response.data);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Dados incorretos, tente novamente!",
+      });
     }
   };
 
