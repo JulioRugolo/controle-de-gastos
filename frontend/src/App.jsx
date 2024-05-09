@@ -1,9 +1,9 @@
 // src/App.jsx
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Header from './components/header';
+import Header from './components/header/header';
 import './App.css';
-import LoginForm from './components/login';
-import RegisterForm from './components/register';
+import LoginForm from './components/login/login';
+import RegisterForm from './components/login/register';
 
 function App() {
   return (

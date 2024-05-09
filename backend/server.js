@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const userRoutes = require('./routes/userRoutes');
+const despesasRoutes = require('./routes/despesasRoutes');
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const app = express();
@@ -23,6 +24,7 @@ app.use(bodyParser.json());
 
 // Rotas
 app.use('/api/users', userRoutes);
+app.use('/api/despesas', despesasRoutes);
 
 app.listen(port, () => {
     console.log(`Servidor rodando em http://localhost:${port}`);
