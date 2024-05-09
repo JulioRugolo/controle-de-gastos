@@ -10,10 +10,8 @@ const cors = require('cors');
 require('dotenv').config(); // Certifique-se de carregar as variáveis de ambiente
 
 // Conexão com o MongoDB
-mongoose.connect(process.env.DB, { // Usando a variável de ambiente
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-});
+mongoose.connect(process.env.DB, { useNewUrlParser: true, useUnifiedTopology: true });
+
 
 // Configuração de CORS
 app.use(cors({
