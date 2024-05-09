@@ -12,3 +12,15 @@ exports.adicionarDespesa = async (req, res) => {
     return res.status(500).json({ success: false, error: 'Erro interno do servidor' });
   }
 };
+
+// Controlador para consultar todas as despesas
+exports.consultarDespesas = async (req, res) => {
+  try {
+    // Consulte todas as despesas
+    const despesas = await Despesa.find();
+    return res.status(200).json({ success: true, data: despesas });
+  } catch (error) {
+    console.error('Erro ao consultar despesas:', error);
+    return res.status(500).json({ success: false, error: 'Erro interno do servidor' });
+  }
+};
