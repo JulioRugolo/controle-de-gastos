@@ -15,7 +15,8 @@ mongoose.connect(process.env.DB, { useNewUrlParser: true, useUnifiedTopology: tr
 
 // Configuração de CORS
 app.use(cors({
-    origin: 'http://localhost:5173' // Permitir apenas requisições desta origem
+    origin: 'https://mdiniz-studio-production.up.railway.app/', // Permitir apenas requisições desta origem
+    credentials: true
 }));
 
 app.use(bodyParser.json());
