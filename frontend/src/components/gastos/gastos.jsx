@@ -3,7 +3,6 @@ import axios from 'axios';
 import GraficoPizza from './graficopizza';
 import './styles.css'; // Importar o arquivo CSS
 import { useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2';
 
 const Gastos = () => {
     const [gastos, setGastos] = useState([]);

@@ -53,7 +53,7 @@ const PieChartComponent = ({ data }) => {
         cy="50%"
         outerRadius={80}
         fill="#8884d8"
-        label={({ name, percent }) => `${(percent * 100).toFixed(2)}%`} // Formatando os rótulos com a porcentagem
+        label={({ percent }) => `${(percent * 100).toFixed(2)}%`} // Formatando os rótulos com a porcentagem
         labelLine={false} // Desativando as linhas de ligação dos rótulos
       >
         {/* Renderizando cada setor do gráfico com uma cor específica */}
