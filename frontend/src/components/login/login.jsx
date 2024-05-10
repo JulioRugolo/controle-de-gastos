@@ -12,14 +12,14 @@ function LoginForm() {
   const handleLogin = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3000/api/users/login', {
+      const response = await axios.post('https://mdiniz-studio-production-3796.up.railway.app/api/users/login', {
         username,
         password
       });
       if (response.data.token) {
         localStorage.setItem('token', response.data.token);
         // Redirecionar para a página de dashboard
-        navigate('/dashboard');
+        navigate('/gastos');
       } else {
         // Tratar erro de login
         Swal.fire({
