@@ -47,6 +47,16 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
+.titlepage {
+  position: absolute;
+  font-size: 30px;
+  top: -25px;
+  width: 180px;
+  text-align: center;
+  left: 110px;
+  color: white
+}
+
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);

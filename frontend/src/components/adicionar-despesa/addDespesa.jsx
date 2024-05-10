@@ -83,6 +83,8 @@ const AdicionarDespesaForm = () => {
             <option value="Lazer">Lazer</option>
             <option value="Moradia">Moradia</option>
             <option value="Studio">Studio</option>
+            <option value="Outros">Outros</option>
+
             {/* Adicione outras opções de categoria conforme necessário */}
         </select>
 

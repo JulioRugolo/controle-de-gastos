@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
+import './header.css';
 
 const Header = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -65,6 +66,7 @@ const Header = () => {
               {navOpen ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20} />}
             </div>
           </button>
+          <h2 className='titlepage'>Controle de Gastos</h2>
         </div>
       )}
 
