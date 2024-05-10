@@ -63,10 +63,10 @@ const Gastos = () => {
                             <tbody>
                                 {gastos.map(gasto => (
                                     <tr key={gasto._id}>
-                                        <td data-label="Lugar">{gasto.lugar}</td>
-                                        <td data-label="Valor">R$ {gasto.valor.toFixed(2)}</td>
-                                        <td data-label="Data">{new Date(gasto.data).toLocaleDateString()}</td>
-                                        <td data-label="Categoria">{gasto.categoria}</td>
+                                        <td>{gasto.lugar}</td>
+                                        <td>R$ {gasto.valor.toFixed(2)}</td>
+                                        <td>{new Date(gasto.data).toLocaleDateString()}</td>
+                                        <td>{gasto.categoria}</td>
                                     </tr>
                                 ))}
                             </tbody>

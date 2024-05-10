@@ -11,42 +11,48 @@
   }
   
   /* Estilos para a responsividade da tabela */
-  @media (max-width: 768px) {
+ /* Estilos para a responsividade da tabela */
+@media (max-width: 768px) {
     .table {
-      overflow-x: auto;
-      display: block;
+        overflow-x: auto;
+        display: block;
     }
-  
+
     .table thead {
-      display: none;
+        display: flex;
+        width: 100%;
     }
-  
+
     .table tbody,
     .table tr,
     .table td {
-      display: block;
-      width: 100%;
+        display: block;
+        width: 100%;
     }
-  
+
     .table tr {
         display: flex;
-        
-      margin-bottom: 10px;
+        font-size: 14px;
     }
-  
+
+    .table th,
     .table td {
-      text-align: left;
-      border-bottom: 1px solid #e2e8f0;
+        text-align: left;
+        border-bottom: 1px solid #e2e8f0;
+        width: 25%; /* Define a largura de cada coluna */
+        box-sizing: border-box; /* Mantém a largura total consistente */
+        padding: 8px; /* Adiciona padding para espaçamento interno */
     }
-  
+
     .table td:last-child {
-      border-bottom: none;
+        border-bottom: none;
     }
-  
-    .table td:before {
-      content: attr(data-label);
-      float: left;
-      font-weight: bold;
+
+    .table td:before,
+    .table th:before {
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        width: 25%;
     }
-  }
-  
+}
