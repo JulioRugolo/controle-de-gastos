@@ -2,16 +2,18 @@ const express = require('express');
 const mongoose = require('mongoose');
 const userRoutes = require('./routes/userRoutes');
 const despesasRoutes = require('./routes/despesasRoutes');
-const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
+require('dotenv').config(); // Certifique-se de carregar as variáveis de ambiente
 const app = express();
 const port = process.env.PORT || 3000;
 const cors = require('cors');
+const mongostring = 'mongodb+srv://admin:OJwkZsJFmw8HMxr9@mdiniz.ktzbflu.mongodb.net/?retryWrites=true&w=majority&appName=mdiniz'
 
-require('dotenv').config(); // Certifique-se de carregar as variáveis de ambiente
+app.use(express.json());
+
 
 // Conexão com o MongoDB
-mongoose.connect(process.env.DB, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.DB || mongostring, { useNewUrlParser: true, useUnifiedTopology: true });
 
 
 // Configuração de CORS
@@ -19,8 +21,6 @@ app.use(cors({
     origin: '*', // Permitir apenas requisições desta origem
     credentials: true
 }));
-
-app.use(bodyParser.json());
 
 // Rotas
 app.use('/api/users', userRoutes);

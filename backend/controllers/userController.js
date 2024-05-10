@@ -1,5 +1,7 @@
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
+require('dotenv').config();
+const jwtSecret = 'banana';
 const bcrypt = require('bcryptjs');
 
 exports.registerUser = async (req, res) => {
@@ -18,12 +20,16 @@ exports.loginUser = async (req, res) => {
     const { username, password } = req.body;
     try {
         const user = await User.findOne({ username });
+        const payload = { id: user._id };
+        const secret = 'banana';
+        const options = { algorithm: 'HS256', expiresIn: '1h' };
         if (!user) {
             return res.status(404).send('Usuário não encontrado!');
         }
         const isMatch = await bcrypt.compare(password, user.password);
         if (isMatch) {
-            const token = jwt.sign({ id: user._id }, 'secret_key', { expiresIn: '1h' });
+            const token = jwt.sign(payload, secret, options);
+            console.log('Usuário autenticado:', user.username + ' com token: ' + token);
             res.status(200).json({ token });
         } else {
             res.status(400).send('Senha incorreta!');
