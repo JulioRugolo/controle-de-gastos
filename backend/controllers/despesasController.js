@@ -4,7 +4,8 @@ const Despesa = require('../models/Despesa');
 exports.adicionarDespesa = async (req, res) => {
   try {
     const { lugar, valor, data, categoria } = req.body;
-    const quemGastou = req.usuario.id; // Assumindo que req.usuario.id contém o ID do usuário logado
+    const quemGastou = req.user.id; // Corrigido para acessar req.user.id
+
     // Crie a despesa
     const despesa = await Despesa.create({ lugar, valor, data, quemGastou, categoria });
     return res.status(201).json({ success: true, data: despesa });

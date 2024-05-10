@@ -1,4 +1,4 @@
-import React from 'react';
+import PropTypes from 'prop-types';
 import { PieChart, Pie, Tooltip, Legend, Cell } from 'recharts';
 
 const PieChartComponent = ({ data }) => {
@@ -8,6 +8,7 @@ const PieChartComponent = ({ data }) => {
   // Mapeando os dados e associando cada categoria a uma cor específica
   const dataWithColors = data.map((entry, index) => ({
     ...entry,
+    name: entry.categoria, // Adicionando o nome da categoria como propriedade 'name'
     color: COLORS[index % COLORS.length], // Usando módulo para garantir que as cores se repitam se houver mais categorias do que cores definidas
   }));
 
@@ -29,10 +30,20 @@ const PieChartComponent = ({ data }) => {
         ))}
       </Pie>
       {/* Personalizando a dica de ferramentas */}
-      <Tooltip formatter={(value, name) => [value, dataWithColors.find(entry => entry.valor === value)?.categoria]} />
+      <Tooltip formatter={(value) => [`R$${value}`, dataWithColors.find(entry => entry.valor === value)?.categoria]} />
+      {/* Passando as categorias para o componente Legend */}
       <Legend />
     </PieChart>
   );
+};
+
+PieChartComponent.propTypes = {
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      valor: PropTypes.number.isRequired,
+      categoria: PropTypes.string.isRequired,
+    })
+  ).isRequired,
 };
 
 export default PieChartComponent;
