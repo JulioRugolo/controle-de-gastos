@@ -68,7 +68,6 @@ const Header = () => {
               {navOpen ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20} />}
             </div>
           </button>
-          <h2 className='titlepage'>Controle de Gastos</h2>
         </div>
       )}
 

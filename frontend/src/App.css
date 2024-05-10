@@ -48,13 +48,8 @@
 }
 
 .titlepage {
-  position: absolute;
+  color: white;
   font-size: 30px;
-  top: -25px;
-  width: 180px;
-  text-align: center;
-  left: 110px;
-  color: white
 }
 
 @keyframes logo-spin {

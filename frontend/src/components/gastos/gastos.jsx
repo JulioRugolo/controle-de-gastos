@@ -44,7 +44,7 @@ const Gastos = () => {
 
     return (
         <div>
-            <h2>Gastos</h2>
+            <h2 className='gastos-title'>Gastos</h2>
             {/* Renderiza a animação de carregamento se o estado de carregamento for verdadeiro */}
             {loading && <div className="loader"></div>}
             {!loading && (
