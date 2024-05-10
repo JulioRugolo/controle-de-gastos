@@ -44,7 +44,7 @@ function LoginForm() {
         <input
           type="text"
           value={username}
-          onChange={e => setUsername(e.target.value)}
+          onChange={e => setUsername((e.target.value).toUpperCase)}
           placeholder="Username"
         />
         <input

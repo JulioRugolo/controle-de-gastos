@@ -7,6 +7,6 @@ const authenticateJWT = require('../middlewares/authenticateJWT'); // Importe o 
 router.post('/adicionar', authenticateJWT, despesasController.adicionarDespesa); // Use o middleware de autenticação JWT aqui
 
 // Rota para consultar todas as despesas
-router.get('/', despesasController.consultarDespesas);
+router.get('/', authenticateJWT,  despesasController.consultarDespesas);
 
 module.exports = router;

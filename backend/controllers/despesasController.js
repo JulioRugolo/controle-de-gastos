@@ -7,7 +7,7 @@ exports.adicionarDespesa = async (req, res) => {
     const quemGastou = req.user.id; // Corrigido para acessar req.user.id
 
     // Crie a despesa
-    const despesa = await Despesa.create({ lugar, valor, data, quemGastou, categoria });
+    const despesa = await Despesa.create({ lugar, valor, data, quemGastou, categoria, id: req.user.id});
     return res.status(201).json({ success: true, data: despesa });
   } catch (error) {
     console.error('Erro ao adicionar despesa:', error);
@@ -19,7 +19,8 @@ exports.adicionarDespesa = async (req, res) => {
 exports.consultarDespesas = async (req, res) => {
   try {
     // Consulte todas as despesas
-    const despesas = await Despesa.find();
+    const quemGastou = req.user.id; // Corrigido para acessar req.user.id
+    const despesas = await Despesa.find({ quemGastou });
     return res.status(200).json({ success: true, data: despesas });
   } catch (error) {
     console.error('Erro ao consultar despesas:', error);
