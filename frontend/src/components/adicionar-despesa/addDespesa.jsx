@@ -76,11 +76,16 @@ const AdicionarDespesaForm = () => {
           <select id="categoria" name="categoria" value={categoria} onChange={(e) => setCategoria(e.target.value)} className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
             <option value="">Selecione uma categoria</option>
             <option value="Alimentação">Alimentação</option>
-            <option value="Transporte">Transporte</option>
+            <option value="Carta">Cartão</option>
+            <option value="Contas">Contas</option>
+            <option value="Crianças">Crianças</option>
+            <option value="Gasolina">Gasolina</option>
             <option value="Lazer">Lazer</option>
             <option value="Moradia">Moradia</option>
+            <option value="Studio">Studio</option>
             {/* Adicione outras opções de categoria conforme necessário */}
-          </select>
+        </select>
+
         </div>
         <button type="submit" className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Adicionar Despesa</button>
       </form>
