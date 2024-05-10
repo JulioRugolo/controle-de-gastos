@@ -12,7 +12,7 @@ function RegisterForm() {
     event.preventDefault();
     try {
       const response = await axios.post('https://mdiniz-studio-production-3796.up.railway.app/api/users/register', {
-        username,
+        username: username.toUpperCase(),
         password
       });
 
@@ -35,7 +35,7 @@ function RegisterForm() {
             <input
             type="text"
             value={username}
-            onChange={e => setUsername((e.target.value).toUpperCase)}
+            onChange={e => setUsername(e.target.value)}
             placeholder="Username"
             />
             <input

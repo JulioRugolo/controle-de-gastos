@@ -13,7 +13,7 @@ function LoginForm() {
     event.preventDefault();
     try {
       const response = await axios.post('https://mdiniz-studio-production-3796.up.railway.app/api/users/login', {
-        username,
+        username: username.toUpperCase(),
         password
       });
       if (response.data.token) {
@@ -44,7 +44,7 @@ function LoginForm() {
         <input
           type="text"
           value={username}
-          onChange={e => setUsername((e.target.value).toUpperCase)}
+          onChange={e => setUsername(e.target.value)}
           placeholder="Username"
         />
         <input
