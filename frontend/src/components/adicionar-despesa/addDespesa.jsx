@@ -56,27 +56,27 @@ const AdicionarDespesaForm = () => {
   };
 
   return (
-    <div className="container mx-auto max-w-md p-4">
-      <h2 className="text-2xl font-bold mb-4">Adicionar Despesa</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-4">
-          <label htmlFor="lugar" className="block text-sm font-medium text-gray-700">Lugar:</label>
+    <div className="container mx-auto max-w-md px-4 py-8">
+      <h2 className="text-2xl font-bold mb-6 text-gray-800">Adicionar Despesa</h2>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div>
+          <label htmlFor="lugar" className="block text-sm font-medium text-gray-700">Descrição:</label>
           <input type="text" id="lugar" name="lugar" value={lugar} onChange={(e) => setLugar(e.target.value)} className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" required />
         </div>
-        <div className="mb-4">
+        <div>
           <label htmlFor="valor" className="block text-sm font-medium text-gray-700">Valor:</label>
           <input type="number" id="valor" name="valor" value={valor} onChange={(e) => setValor(e.target.value)} className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" required />
         </div>
-        <div className="mb-4">
+        <div>
           <label htmlFor="data" className="block text-sm font-medium text-gray-700">Data:</label>
           <input type="date" id="data" name="data" value={data} onChange={(e) => setData(e.target.value)} className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" required />
         </div>
-        <div className="mb-4">
+        <div>
           <label htmlFor="categoria" className="block text-sm font-medium text-gray-700">Categoria:</label>
           <select id="categoria" name="categoria" value={categoria} onChange={(e) => setCategoria(e.target.value)} className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
             <option value="">Selecione uma categoria</option>
             <option value="Alimentação">Alimentação</option>
-            <option value="Carta">Cartão</option>
+            <option value="Cartão">Cartão</option>
             <option value="Contas">Contas</option>
             <option value="Crianças">Crianças</option>
             <option value="Gasolina">Gasolina</option>
@@ -84,12 +84,10 @@ const AdicionarDespesaForm = () => {
             <option value="Moradia">Moradia</option>
             <option value="Studio">Studio</option>
             <option value="Outros">Outros</option>
-
             {/* Adicione outras opções de categoria conforme necessário */}
-        </select>
-
+          </select>
         </div>
-        <button type="submit" className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Adicionar Despesa</button>
+        <button type="submit" className="w-full bg-indigo-600 text-white py-3 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Adicionar Despesa</button>
       </form>
     </div>
   );

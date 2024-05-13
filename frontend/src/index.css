@@ -4,11 +4,11 @@
 
 a {
   font-weight: 500;
-  color: #ffffff;
+  color: #ffffff; /* Mudança para um tom de cinza mais suave para melhor legibilidade */
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: #2b6cb0; /* Um azul mais suave para hover */
 }
 
 body {
@@ -19,6 +19,15 @@ body {
   min-height: 100vh;
 }
 
+.toggle-mobile-box button {
+  background-color: rgba(0, 0, 0, 0.753);
+}
+
+.toggle-mobile-box button:hover {
+  background-color: rgba(0, 0, 0, 0.753);
+  border: unset;
+}
+
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
@@ -26,24 +35,39 @@ h1 {
 
 button {
   border-radius: 8px;
-  border: 1px solid transparent;
+  border: 2px solid transparent; /* Bordas mais definidas para um look mais nítido */
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #000000;
-  color: white; 
+  background-color: #4a5568; /* Um cinza escuro para um visual mais suave */
+  color: white;
   margin: 5px;
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: background-color 0.25s, border-color 0.25s; /* Adicionando transição ao background */
 }
 button:hover {
-  border-color: #646cff;
+  background-color: #2b6cb0; /* Mudança de cor em hover para um azul suave */
+  border-color: #cbd5e0; /* Bordas em um cinza claro para destacar o botão em hover */
 }
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: 4px auto rgba(43, 108, 176, 0.5); /* Foco mais suave com cor semi-transparente */
 }
+
+input, select {
+  display: block;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  text-align: center;
+  border: #1a202c 2px solid; /* Adicionando borda para melhor visibilidade */
+  width: 250px;
+  border-radius: 8px;
+}
+
+
 
 * {
   box-sizing: border-box;
@@ -53,13 +77,13 @@ button:focus-visible {
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    color: #4a5568; /* Um tom de cinza para melhor leitura e consistência */
+    background-color: #edf2f7; /* Um fundo mais claro, mas não branco puro, reduzindo o brilho */
   }
   a:hover {
-    color: #747bff;
+    color: #4299e1; /* Um azul claro, mantendo boa visibilidade em hover */
   }
   button {
-    background-color: #f9f9f9;
+    background-color: #e2e8f0; /* Um cinza muito claro para botões em tema claro */
   }
 }

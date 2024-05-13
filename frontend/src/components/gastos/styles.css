@@ -37,11 +37,12 @@
 
     .table th,
     .table td {
-        text-align: left;
+        text-align: center;
         border-bottom: 1px solid #e2e8f0;
         width: 25%; /* Define a largura de cada coluna */
         box-sizing: border-box; /* Mantém a largura total consistente */
-        padding: 8px; /* Adiciona padding para espaçamento interno */
+        padding: 0px; /* Adiciona padding para espaçamento interno */
+        font-size: 12px;
     }
 
     .table td:last-child {

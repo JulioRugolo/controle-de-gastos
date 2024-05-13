@@ -45,7 +45,6 @@ const Gastos = () => {
     return (
         <div>
             <h2 className='gastos-title'>Gastos</h2>
-            {/* Renderiza a animação de carregamento se o estado de carregamento for verdadeiro */}
             {loading && <div className="loader"></div>}
             {!loading && (
                 <div>
@@ -54,7 +53,7 @@ const Gastos = () => {
                         <table className="table">
                             <thead>
                                 <tr>
-                                    <th>Lugar</th>
+                                    <th>Descrição</th>
                                     <th>Valor</th>
                                     <th>Data</th>
                                     <th>Categoria</th>

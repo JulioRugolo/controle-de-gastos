@@ -62,7 +62,7 @@ const Header = () => {
   return (
     <div className='nav-container'>
       {isMobile && (
-        <div className='mobile-toggle'>
+        <div className='mobile-toggle toggle-mobile-box'>
           <button onClick={handleNavToggle}>
             <div style={{ color: 'white' }}>
               {navOpen ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20} />}
