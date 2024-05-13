@@ -12,16 +12,21 @@ function App() {
   return (
     <Router>
       <Header />
-      <div className="container mx-auto text-center p-4">
+      <div className="container mx-auto text-center p-4 flex justify-center items-center h-full">
         <Routes>
           <Route path="/login" element={<LoginForm />} />
           <Route path="/register" element={<RegisterForm />} />
           <Route path="/gastos" element={<Gastos />} />
           <Route path="/buscar" element={<Search />} />
-          <Route path="/dashboard" element={<h1>Dashboard</h1>} />
           <Route path="/adicionar-despesa" element={<AdicionarDespesaForm />} />
           <Route path="/" element={
-            <h1>Teste</h1>
+            <div className="text-center">
+              <h1>Bem-vindo ao seu aplicativo de controle de gastos!</h1>
+              <p>Aqui você pode gerenciar suas despesas de forma simples e eficiente.</p>
+              <p>Para começar, faça login na sua conta ou registre-se se ainda não tem uma.</p>
+              <p>Lembre-se de que você pode adicionar despesas na aba `Adicionar Despesa` e visualizar todas elas na aba `Gastos`.</p>
+              <p>Para qualquer dúvida, entre em contato conosco pelo e-mail julio@rugolo.dev.</p>
+            </div>
           } />
         </Routes>
       </div>
