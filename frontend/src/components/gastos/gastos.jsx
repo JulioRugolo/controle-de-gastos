@@ -79,6 +79,35 @@ const Gastos = () => {
 
     // Combina e ordena as entradas e gastos por data
     const combinedData = [...gastos, ...entradas].sort((a, b) => new Date(a.data) - new Date(b.data));
+    
+    const exportarPDF = async () => {
+        const token = localStorage.getItem('token');
+        try {
+          // Configuração para passar o token no header
+          const config = {
+            headers: {
+              Authorization: `Bearer ${token}`
+            },
+            responseType: 'blob'  // Resposta esperada como um Blob para download direto
+          };
+      
+          // Faça a requisição e receba o Blob como resposta
+          const response = await axios.get('https://mdiniz-studio-production-3796.up.railway.app/api/despesas/pdf', config);
+      
+          // Cria um URL para o blob
+          const fileURL = window.URL.createObjectURL(new Blob([response.data]));
+          const fileLink = document.createElement('a');
+          fileLink.href = fileURL;
+          fileLink.setAttribute('download', 'Relatorio_Despesas.pdf');
+          document.body.appendChild(fileLink);
+      
+          // Trigger download
+          fileLink.click();
+          fileLink.parentNode.removeChild(fileLink);
+        } catch (error) {
+          console.error('Erro ao exportar PDF:', error);
+        }
+      };
 
     return (
         <div>
@@ -117,6 +146,8 @@ const Gastos = () => {
                     </div>
                     <div>
                         <p className="text-right">Saldo Atual: R$ {total.toFixed(2)}</p>
+                        <button onClick={exportarPDF} className="export-button">Exportar PDF</button>
+
                     </div>
                     <GraficoPizza data={combinedData} />
                 </div>

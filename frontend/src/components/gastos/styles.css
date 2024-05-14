@@ -49,6 +49,20 @@
   background-color: #f8d7da; /* Cor de fundo para linhas de despesa */
 }
 
+.export-button {
+  padding: 10px;
+  margin-top: 20px;
+  background-color: blue;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.export-button:hover {
+  background-color: darkblue;
+}
+
 /* Estilos para responsividade */
 @media (max-width: 768px) {
   .gastos-title {

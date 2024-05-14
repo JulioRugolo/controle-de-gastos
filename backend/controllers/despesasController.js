@@ -1,4 +1,5 @@
 const Despesa = require('../models/Despesa');
+const PDFDocument = require('pdfkit');
 
 // Controlador para adicionar despesa
 exports.adicionarDespesa = async (req, res) => {
@@ -104,3 +105,40 @@ exports.consultarComprovante = async (req, res) => {
     res.status(500).json({ success: false, error: 'Erro interno do servidor' });
   }
 };
+
+exports.gerarPDF = async (req, res) => {
+  try {
+    const despesas = await Despesa.find({ quemGastou: req.user.id });
+
+    const doc = new PDFDocument();
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', `attachment; filename="relatorio-${Date.now()}.pdf"`);
+
+    doc.fontSize(20).text('Relatório de Gastos e Entradas', { align: 'center' });
+    doc.moveDown();
+
+    despesas.forEach(despesa => {
+      doc.fontSize(14).text(`Descrição: ${despesa.descricao}`, { continued: true });
+      doc.text(` Valor: R$${despesa.valor.toFixed(2)}`);
+      doc.text(`Data: ${despesa.data.toLocaleDateString()}`);
+      doc.text(`Categoria: ${despesa.categoria}`);
+      if (despesa.comprovante) {
+        // Se você tiver imagens armazenadas como URLs ou em base64, pode adicioná-las aqui.
+        doc.image(Buffer.from(despesa.comprovante.data, 'base64'), {
+          fit: [250, 300],
+          align: 'center',
+          valign: 'center'
+        });
+        doc.addPage();
+      }
+      doc.moveDown();
+    });
+
+    doc.pipe(res);
+    doc.end();
+  } catch (error) {
+    console.error('Erro ao gerar PDF:', error);
+    res.status(500).send('Erro interno ao gerar o PDF');
+  }
+};
+

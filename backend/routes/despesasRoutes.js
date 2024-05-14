@@ -10,6 +10,9 @@ router.post('/adicionar', authenticateJWT, upload, despesasController.adicionarD
 // Rota para consultar todas as despesas
 router.get('/', authenticateJWT, despesasController.consultarDespesas);
 
+// Rota para gerar PDF
+router.get('/pdf', authenticateJWT, despesasController.gerarPDF);
+
 // Rota para buscar despesas por nome
 router.get('/buscar/:lugar', authenticateJWT, despesasController.buscarDespesaPorNome);
 
