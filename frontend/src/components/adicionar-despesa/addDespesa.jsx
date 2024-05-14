@@ -8,7 +8,7 @@ import './style.css';
 // Componente do formulário de adicionar despesa
 const AdicionarDespesaForm = () => {
   // Defina os estados para os campos do formulário
-  const [lugar, setLugar] = useState('');
+  const [descricao, setDescricao] = useState('');
   const [valor, setValor] = useState('');
   const [data, setData] = useState('');
   const [categoria, setCategoria] = useState('');
@@ -19,9 +19,9 @@ const AdicionarDespesaForm = () => {
 
     try {
       const token = localStorage.getItem('token');
-      const url = 'https://mdiniz-studio-production-3796.up.railway.app/api/despesas/adicionar'; // Use a URL correta
+      const url = 'http://localhost:3000/api/despesas/adicionar'; // Use a URL correta
       const response = await axios.post(url, {
-        lugar,
+        descricao,
         valor,
         data,
         categoria
@@ -60,8 +60,8 @@ const AdicionarDespesaForm = () => {
       <h2 className="text-2xl font-bold mb-6 text-gray-800">Adicionar Despesa</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label htmlFor="lugar" className="block text-sm font-medium text-gray-700">Descrição:</label>
-          <input type="text" id="lugar" name="lugar" value={lugar} onChange={(e) => setLugar(e.target.value)} className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" required />
+          <label htmlFor="descricao" className="block text-sm font-medium text-gray-700">Descrição:</label>
+          <input type="text" id="descricao" name="descricao" value={descricao} onChange={(e) => setDescricao(e.target.value)} className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" required />
         </div>
         <div>
           <label htmlFor="valor" className="block text-sm font-medium text-gray-700">Valor:</label>

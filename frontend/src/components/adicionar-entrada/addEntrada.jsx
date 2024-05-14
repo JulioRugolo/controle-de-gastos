@@ -8,7 +8,7 @@ import './style.css';
 // Componente do formulário de adicionar entrada
 const AdicionarEntradaForm = () => {
   // Defina os estados para os campos do formulário
-  const [origem, setOrigem] = useState('');
+  const [descricao, setDescricao] = useState('');
   const [valor, setValor] = useState('');
   const [data, setData] = useState('');
   const [categoria, setCategoria] = useState('');
@@ -19,9 +19,9 @@ const AdicionarEntradaForm = () => {
 
     try {
       const token = localStorage.getItem('token');
-      const url = 'https://mdiniz-studio-production-3796.up.railway.app/api/entradas/adicionar'; // Use a URL correta
+      const url = 'http://localhost:3000/api/entradas/adicionar'; // Use a URL correta
       const response = await axios.post(url, {
-        origem,
+        descricao,
         valor,
         data,
         categoria
@@ -61,7 +61,7 @@ const AdicionarEntradaForm = () => {
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label htmlFor="origem" className="block text-sm font-medium text-gray-700">Origem:</label>
-          <input type="text" id="origem" name="origem" value={origem} onChange={(e) => setOrigem(e.target.value)} className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" required />
+          <input type="text" id="origem" name="origem" value={descricao} onChange={(e) => setDescricao(e.target.value)} className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" required />
         </div>
         <div>
           <label htmlFor="valor" className="block text-sm font-medium text-gray-700">Valor:</label>

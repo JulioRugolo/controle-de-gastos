@@ -20,6 +20,10 @@
     font-weight: 700;
   }
   
+  .text-right{
+    font-weight: bold;
+    margin-top: 20px;
+  }
   /* Estilos para a responsividade da tabela */
  /* Estilos para a responsividade da tabela */
 @media (max-width: 768px) {

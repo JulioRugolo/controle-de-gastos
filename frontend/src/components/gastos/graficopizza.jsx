@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import { PieChart, Pie, Tooltip, Legend, Cell } from 'recharts';
 
 const PieChartComponent = ({ data }) => {
-  // Definindo uma lista de cores para as categorias
   const COLORS = [
     '#1f77b4', // Azul
     '#ff7f0e', // Laranja
@@ -14,19 +13,23 @@ const PieChartComponent = ({ data }) => {
     '#7f7f7f', // Cinza
     '#bcbd22', // Verde Claro
   ];
-  
+
+  // Categorias a serem excluídas do gráfico de pizza
+  const excludedCategories = ["Salário", "Freelance", "Investimento", "Presente"];
 
   // Agrupando os dados por categoria e somando os valores correspondentes
   const groupedData = data.reduce((acc, curr) => {
+    // Se a categoria for uma das excluídas, pular esta entrada
+    if (excludedCategories.includes(curr.categoria)) return acc;
+
     let value;
     if (typeof curr.valor === 'string') {
-      value = parseFloat(curr.valor.replace(',', '.')); // Convertendo o valor para número
+      value = parseFloat(curr.valor.replace(',', '.'));
     } else {
-      value = parseFloat(curr.valor); // Convertendo o valor diretamente para número
+      value = parseFloat(curr.valor);
     }
-    if (isNaN(value)) {
-      value = 0; // Se o valor não puder ser convertido para número, definimos como 0
-    }
+    if (isNaN(value)) value = 0;
+
     if (acc[curr.categoria]) {
       acc[curr.categoria] += value;
     } else {
@@ -39,8 +42,8 @@ const PieChartComponent = ({ data }) => {
   const dataWithColors = Object.entries(groupedData).map(([categoria, valor], index) => ({
     categoria,
     valor,
-    name: categoria, // Adicionando o nome da categoria como propriedade 'name'
-    color: index < COLORS.length ? COLORS[index] : COLORS[index % COLORS.length], // Usando o index diretamente para obter as cores
+    name: categoria,
+    color: index < COLORS.length ? COLORS[index] : COLORS[index % COLORS.length],
   }));
 
   return (
@@ -48,22 +51,19 @@ const PieChartComponent = ({ data }) => {
       <Pie
         dataKey="valor"
         isAnimationActive={false}
-        data={dataWithColors} // Usando os dados agrupados com cores associadas
+        data={dataWithColors}
         cx="50%"
         cy="50%"
         outerRadius={80}
         fill="#8884d8"
-        label={({ percent }) => `${(percent * 100).toFixed(2)}%`} // Formatando os rótulos com a porcentagem
-        labelLine={false} // Desativando as linhas de ligação dos rótulos
+        label={({ percent }) => `${(percent * 100).toFixed(2)}%`}
+        labelLine={false}
       >
-        {/* Renderizando cada setor do gráfico com uma cor específica */}
         {dataWithColors.map((entry, index) => (
           <Cell key={`cell-${index}`} fill={entry.color} />
         ))}
       </Pie>
-      {/* Personalizando a dica de ferramentas */}
       <Tooltip formatter={(value) => [`R$${value.toFixed(2).replace('.', ',')}`, `${dataWithColors.find((entry) => entry.valor === value)?.categoria}`]} />
-      {/* Passando as categorias para o componente Legend */}
       <Legend />
     </PieChart>
   );
