@@ -13,7 +13,7 @@ const Gastos = () => {
 
     useEffect(() => {
         const token = localStorage.getItem('token');
-        if (!token) {
+        if (!token && total === 0 || !token) {
             navigate('/login');
             return;
         }

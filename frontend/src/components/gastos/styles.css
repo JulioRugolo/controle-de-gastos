@@ -6,7 +6,7 @@
   
   .table th,
   .table td {
-    padding: 8px;
+    padding: 5px;
     border: 1px solid #e2e8f0;
   }
 
@@ -50,6 +50,8 @@
     .table tr,
     .table td {
         display: block;
+        align-items: center;
+        justify-content: center;
         width: 100%;
     }
 
@@ -62,10 +64,10 @@
     .table td {
         text-align: center;
         border-bottom: 1px solid #e2e8f0;
-        width: 25%; /* Define a largura de cada coluna */
+        width: 20%; /* Define a largura de cada coluna */
         box-sizing: border-box; /* Mantém a largura total consistente */
         padding: 0px; /* Adiciona padding para espaçamento interno */
-        font-size: 12px;
+        font-size: 10px;
     }
 
     .table td:last-child {

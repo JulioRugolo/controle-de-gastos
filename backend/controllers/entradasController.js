@@ -18,7 +18,9 @@ exports.adicionarEntrada = async (req, res) => {
 // Controlador para consultar todas as entradas
 exports.consultarEntradas = async (req, res) => {
     try {
-      const entradas = await Entrada.find({ quemGastou: req.user.id });
+      const quemGastou = req.user.id; // Corrigido para acessar req.user.id
+      const entradas = await Entrada.find({ quemGastou });
+
       return res.status(200).json({ success: true, data: entradas });
     } catch (error) {
       console.error('Erro ao buscar entradas:', error);
