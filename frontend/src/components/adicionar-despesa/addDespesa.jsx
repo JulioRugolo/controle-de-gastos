@@ -12,6 +12,21 @@ const AdicionarDespesaForm = () => {
   const [valor, setValor] = useState('');
   const [data, setData] = useState('');
   const [categoria, setCategoria] = useState('');
+  const [comprovantePath, setComprovantePath] = useState('');
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const randomFileName = Math.random().toString(36).substring(2, 15);
+      const filePath = `../../assets/uploads/${randomFileName}`; // Caminho fictício, ajuste conforme seu ambiente
+      // Simulação de salvamento de arquivo
+      setComprovantePath(filePath);
+  
+      // Aqui você faria o upload para seu servidor ou serviço de armazenamento e salvaria `filePath` no estado
+      // Exemplo:
+      // uploadFileToServer(file, filePath);
+    }
+  };
 
   // Função para lidar com o envio do formulário
   const handleSubmit = async (event) => {
@@ -19,12 +34,14 @@ const AdicionarDespesaForm = () => {
 
     try {
       const token = localStorage.getItem('token');
-      const url = 'https://mdiniz-studio-production-3796.up.railway.app/api/despesas/adicionar'; // Use a URL correta
+      const url = 'https://controle-gastos-production-d46b.up.railway.app/api/despesas/adicionar'; // Use Banco
+      // const url = 'http://localhost:3000/api/despesas/adicionar'; // Url local
       const response = await axios.post(url, {
         descricao,
         valor,
         data,
-        categoria
+        categoria,
+        comprovantePath 
       }, {
         headers: {
           Authorization: `Bearer ${token}` // Substitua `token` pelo token JWT do usuário autenticado
@@ -86,6 +103,15 @@ const AdicionarDespesaForm = () => {
             <option value="Outros">Outros</option>
             {/* Adicione outras opções de categoria conforme necessário */}
           </select>
+        </div>
+        <div>
+          <input
+            type="file"
+            id="comprovante"
+            name="comprovante"
+            onChange={handleFileChange}
+            className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          />
         </div>
         <button type="submit" className="w-full bg-indigo-600 text-white py-3 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Adicionar Despesa</button>
       </form>

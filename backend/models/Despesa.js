@@ -25,6 +25,9 @@ const despesaSchema = new mongoose.Schema({
   id: {
     type: String,
     required: true
+  },
+  comprovantePath: {
+    type: String
   }
 });
 

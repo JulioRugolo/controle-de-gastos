@@ -19,6 +19,10 @@
     background-color: unset;
     font-weight: 700;
   }
+
+  .view-button {
+    color: green;
+  }
   
   .text-right{
     font-weight: bold;

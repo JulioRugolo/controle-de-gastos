@@ -3,11 +3,12 @@ const Despesa = require('../models/Despesa');
 // Controlador para adicionar despesa
 exports.adicionarDespesa = async (req, res) => {
   try {
-    const { descricao, valor, data, categoria } = req.body;
+    const { descricao, valor, data, categoria, comprovantePath  } = req.body;
     const quemGastou = req.user.id; // Corrigido para acessar req.user.id
+    const comprovantePathFull = `https://controle-gastos-production-d46b.up.railway.app/assets/${comprovantePath}`
 
     // Crie a despesa
-    const despesa = await Despesa.create({ descricao, valor, data, quemGastou, categoria, id: req.user.id});
+    const despesa = await Despesa.create({ descricao, valor, data, quemGastou, categoria, id: req.user.id, comprovantePath: comprovantePathFull });
     return res.status(201).json({ success: true, data: despesa });
   } catch (error) {
     console.error('Erro ao adicionar despesa:', error);
