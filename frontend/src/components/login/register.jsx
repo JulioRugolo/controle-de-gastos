@@ -46,6 +46,7 @@ function RegisterForm() {
             />
             <button type="submit">Registrar</button>
         </form>
+        <p className='no-account'>Já tem uma conta? <a href='/login'>Login</a></p>
         </div>
     </>
   );

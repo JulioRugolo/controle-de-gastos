@@ -27,6 +27,19 @@
     font-weight: bold;
     margin-top: 20px;
 }
+
+.no-account {
+    font-size: 1.2rem;
+}
+
+.no-account a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.no-account a:hover {
+    color: #424242;
+}
   
   /* Estilos para dispositivos móveis */
   @media screen and (max-width: 767px) {

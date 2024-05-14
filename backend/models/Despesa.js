@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const despesaSchema = new mongoose.Schema({
-  lugar: {
+  descricao: {
     type: String,
     required: true
   },

@@ -37,8 +37,6 @@ const Header = () => {
 
   const handleNavToggle = () => {
     setNavOpen(!navOpen);
-    const title = document.getElementsByClassName('titlepage')[0];
-    title.style.display = title.style.display === 'none' ? 'block' : 'none';
   };
 
   const handleLogout = () => {

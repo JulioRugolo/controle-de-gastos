@@ -9,6 +9,16 @@
     padding: 8px;
     border: 1px solid #e2e8f0;
   }
+
+  .delete-button {
+    background-color: white;
+    font-size: 6px;
+  }
+
+  .delete-button:hover {
+    background-color: unset;
+    font-weight: 700;
+  }
   
   /* Estilos para a responsividade da tabela */
  /* Estilos para a responsividade da tabela */

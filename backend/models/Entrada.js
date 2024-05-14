@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const entradaSchema = new mongoose.Schema({
-  origem: {
+  descricao: {
     type: String,
     required: true
   },

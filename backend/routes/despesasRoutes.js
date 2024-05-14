@@ -12,5 +12,9 @@ router.get('/', authenticateJWT, despesasController.consultarDespesas);
 // Rota para buscar despesas por nome
 router.get('/buscar/:lugar', authenticateJWT, despesasController.buscarDespesaPorNome);
 
+// Rota para excluir despesa
+router.delete('/despesa/:id', despesasController.excluirDespesa);
+
+
 
 module.exports = router;
