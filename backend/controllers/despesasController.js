@@ -34,9 +34,10 @@ exports.buscarDespesaPorNome = async (req, res) => {
     
     // Consulte o banco de dados para encontrar despesas com o nome fornecido
     const despesas = await Despesa.find({ lugar: { $regex: new RegExp(`^${lugar}$`, 'i') } }); // Use expressões regulares para buscar despesas com o nome fornecido, o 'i' faz com que seja uma pesquisa de case-insensitive
+    const despesasDoUsuario = despesas.filter(despesa => despesa.quemGastou === req.user.id); // Filtrar despesas do usuário autenticado
     console.log(lugar);
     
-    res.json({ success: true, data: despesas }); // Envie as despesas encontradas como resposta
+    res.json({ success: true, data: despesasDoUsuario }); // Envie as despesas encontradas como resposta
   } catch (error) {
     console.error('Erro ao buscar despesas por nome:', error);
     res.status(500).json({ success: false, error: 'Erro interno do servidor' });
