@@ -7,6 +7,7 @@ import RegisterForm from './components/login/register';
 import AdicionarDespesaForm from './components/adicionar-despesa/addDespesa';
 import Gastos from './components/gastos/gastos';
 import Search from './components/search/search';
+import AdicionarEntradaForm from './components/adicionar-entrada/addEntrada';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/gastos" element={<Gastos />} />
           <Route path="/buscar" element={<Search />} />
           <Route path="/adicionar-despesa" element={<AdicionarDespesaForm />} />
+          <Route path="/adicionar-entrada" element={<AdicionarEntradaForm />} />
           <Route path="/" element={
             <div className="text-center">
               <h1>Bem-vindo ao seu aplicativo de controle de gastos!</h1>

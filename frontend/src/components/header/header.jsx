@@ -52,7 +52,8 @@ const Header = () => {
     <>
       <a href='/'>Home</a>
       <a href='/gastos'>Gastos</a>
-      <a href='/adicionar-despesa'>Adicionar despesa</a>
+      <a href='/adicionar-despesa'>Adicionar Despesa</a>
+      <a href='/adicionar-entrada'>Adicionar Entrada</a>
       <a href='/buscar'>Buscar Despesa</a>
       {!loggedIn ? <a href='/login'>Login</a> : <a href='#' onClick={handleLogout}>Logout</a>}
       {!loggedIn && <a href='/register'>Registrar</a>}
