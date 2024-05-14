@@ -6,7 +6,7 @@ const entradasRoutes = require('./routes/entradasRoutes');
 const jwt = require('jsonwebtoken');
 require('dotenv').config(); // Certifique-se de carregar as variáveis de ambiente
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT;
 const cors = require('cors');
 
 app.use(express.json());
