@@ -107,7 +107,7 @@ const Gastos = () => {
                                         <td>
                                             <button onClick={() => handleDelete(item._id)} className="delete-button">❌</button>
                                                 {item.comprovante && (
-                                                    <button onClick={() => window.open(`https://mdiniz-studio-production-3796.up.railway.app/api/despesas/comprovante/${item._id}`, '_blank')} className="view-button">👁️</button>
+                                                    <button onClick={() => window.open(`https://mdiniz-studio-production-3796.up.railway.app/api/despesas/comprovante/${item._id}`, '_blank')} className="view-button delete-button">👁️</button>
                                                 )}
                                         </td>
                                     </tr>

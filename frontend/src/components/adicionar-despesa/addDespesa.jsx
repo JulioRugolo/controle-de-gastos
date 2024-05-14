@@ -33,7 +33,7 @@ const AdicionarDespesaForm = () => {
 
     try {
         const token = localStorage.getItem('token');
-        const url = 'http://localhost:3000/api/despesas/adicionar';
+        const url = 'https://controle-gastos-production-d46b.up.railway.app/api/despesas/adicionar';
         const response = await axios.post(url, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',

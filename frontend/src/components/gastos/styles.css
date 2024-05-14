@@ -11,8 +11,9 @@
   }
 
   .delete-button {
-    background-color: white;
-    font-size: 6px;
+    background-color: rgb(45, 125, 245);
+    font-size: 15px;
+    padding: 0 5px;
   }
 
   .delete-button:hover {
