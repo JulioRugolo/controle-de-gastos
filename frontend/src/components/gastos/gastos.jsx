@@ -92,7 +92,7 @@ const Gastos = () => {
           };
       
           // Faça a requisição e receba o Blob como resposta
-          const response = await axios.get('https://mdiniz-studio-production-3796.up.railway.app/api/despesas/pdf', config);
+          const response = await axios.get('http://localhost:3000/api/despesas/pdf', config);
       
           // Cria um URL para o blob
           const fileURL = window.URL.createObjectURL(new Blob([response.data]));

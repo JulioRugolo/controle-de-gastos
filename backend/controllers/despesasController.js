@@ -114,26 +114,61 @@ exports.gerarPDF = async (req, res) => {
     res.setHeader('Content-Type', 'application/pdf');
     res.setHeader('Content-Disposition', `attachment; filename="relatorio-${Date.now()}.pdf"`);
 
+    const fontRegular = './fonts/Roboto-Regular.ttf';
+    const fontBold = './fonts/Roboto-Bold.ttf';
+
     doc.fontSize(20).text('Relatório de Gastos e Entradas', { align: 'center' });
     doc.moveDown();
 
     despesas.forEach(despesa => {
-      doc.fontSize(14).text(`Descrição: ${despesa.descricao}`, { continued: true });
-      doc.text(` Valor: R$${despesa.valor.toFixed(2)}`);
-      doc.text(`Data: ${despesa.data.toLocaleDateString()}`);
-      doc.text(`Categoria: ${despesa.categoria}`);
+      doc.font(fontBold).fontSize(14);
+    
+      // Descrição
+      doc.text('Descrição: ', { continued: true });
+      doc.font(fontRegular).fontSize(14);
+      doc.text(despesa.descricao);
+
+      // Valor
+      doc.moveDown(0.5);
+      doc.font(fontBold);
+      doc.text('Valor: ', { continued: true });
+      doc.font(fontRegular).text(`R$${despesa.valor.toFixed(2)}`, );
+    
+      // Data
+      doc.moveDown(0.5);
+      doc.font(fontBold);
+      doc.text('Data: ', { continued: true });
+      doc.font(fontRegular).text(despesa.data.toLocaleDateString(), );
+      
+      // Categoria
+      doc.moveDown(0.5);
+      doc.font(fontBold);
+      doc.text('Categoria: ', { continued: true });
+      doc.font(fontRegular).text(despesa.categoria, );
+      doc.moveDown(2);
+
+    });
+    
+    doc.addPage();
+
+    doc.font(fontBold).fontSize(20);
+    doc.text('Comprovantes', { align: 'center' });
+    doc.moveDown(2);
+
+    despesas.forEach(despesa => {
       if (despesa.comprovante) {
-        // Se você tiver imagens armazenadas como URLs ou em base64, pode adicioná-las aqui.
-        doc.image(Buffer.from(despesa.comprovante.data, 'base64'), {
-          fit: [250, 300],
-          align: 'center',
-          valign: 'center'
+        const imageWidth = 300;
+        const xPosition = (doc.page.width - imageWidth) / 2;
+    
+        doc.image(Buffer.from(despesa.comprovante.data, 'base64'), xPosition, doc.y, {
+          fit: [350, 400]
         });
+    
         doc.addPage();
       }
-      doc.moveDown();
+    
     });
-
+    
     doc.pipe(res);
     doc.end();
   } catch (error) {
