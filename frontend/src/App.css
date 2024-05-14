@@ -3,6 +3,7 @@
   flex-direction: column;
   width: 100%;
   text-align: center;
+  max-height: 100vh;
 }
 
 .nav-container {
@@ -10,6 +11,7 @@
   color: white;
   display: flex;
   position: fixed;
+  z-index: 1000;
   top: 0;
   left: 0;
   width: 100%;

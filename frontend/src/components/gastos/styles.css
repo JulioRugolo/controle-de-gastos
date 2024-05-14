@@ -1,96 +1,115 @@
-/* Estilos para a tabela */
+/* Estilos básicos da tabela */
 .table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  .table th,
-  .table td {
-    padding: 5px;
-    border: 1px solid #e2e8f0;
-  }
-
-  .delete-button {
-    background-color: rgb(45, 125, 245);
-    font-size: 15px;
-    padding: 0 5px;
-  }
-
-  .delete-button:hover {
-    background-color: unset;
-    font-weight: 700;
-  }
-
-  .view-button {
-    color: green;
-  }
-  
-  .text-right{
-    font-weight: bold;
-    margin-top: 20px;
-  }
-
-  .despesa-row {
-    background-color: #f8d7da; /* Cor vermelho claro */
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px; /* Espaço abaixo da tabela */
 }
-  /* Estilos para a responsividade da tabela */
- /* Estilos para a responsividade da tabela */
+
+.table th, .table td {
+  padding: 12px; /* Aumento do padding para melhor legibilidade */
+  border: 1px solid #e2e8f0;
+  text-align: left; /* Alinhamento do texto */
+}
+
+/* Estilização dos botões */
+.delete-button {
+  background-color: rgb(220, 53, 69); /* Cor vermelha */
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px; /* Bordas arredondadas */
+}
+
+.delete-button:hover {
+  background-color: rgb(198, 47, 62); /* Cor mais escura no hover */
+}
+
+.view-button {
+  background-color: green;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin-left: 10px; /* Espaço entre botões */
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.view-button:hover {
+  background-color: darkgreen;
+}
+
+.text-right {
+  font-weight: bold;
+  text-align: right; /* Alinhamento do texto à direita */
+  margin-top: 20px;
+}
+
+.despesa-row {
+  background-color: #f8d7da; /* Cor de fundo para linhas de despesa */
+}
+
+/* Estilos para responsividade */
 @media (max-width: 768px) {
-    .table {
-        overflow-x: auto;
-        display: block;
-    }
+  .gastos-title {
+    font-size: 1.5rem; /* Tamanho maior para o título */
+    margin-top: 120px;
+    font-weight: bold;
+    font-size: 25px;
+  }
+  .table {
+    margin-top: 20px;
+    display: block;
+    overflow-x: auto; /* Adiciona barra de rolagem horizontal */
+    white-space: nowrap; /* Evita quebra de linha */
+    
+  }
+  .table, .table thead, .table tbody, .table th, .table td, .table tr {
+      display: block;
+  }
 
-    .table thead {
-        display: flex;
-        width: 100%;
-    }
+  .table thead {
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+  }
 
-    .table tbody,
-    .table tr,
-    .table td {
-        display: block;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-    }
+  .table tr { 
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+   }
 
-    .table tr {
-        display: flex;
-        font-size: 14px;
-    }
+  .table td {
+      border: none;
+      border-bottom: 1px solid #eee;
+      position: relative;
+      padding-left: 50%; /* Espaço para o título da coluna no modo responsivo */
+      text-align: right;
+  }
 
-    .table th,
-    .table td {
-        text-align: center;
-        border-bottom: 1px solid #e2e8f0;
-        width: 20%; /* Define a largura de cada coluna */
-        box-sizing: border-box; /* Mantém a largura total consistente */
-        padding: 0px; /* Adiciona padding para espaçamento interno */
-        font-size: 10px;
-    }
+  .table td:before {
+      /* Títulos das colunas no modo responsivo */
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      width: 45%;
+      padding-right: 10px;
+      white-space: nowrap;
+      text-align: left;
+      font-weight: bold;
+  }
 
-    .table td:last-child {
-        border-bottom: none;
-    }
+  /* Títulos das colunas como 'data-label' nos elementos 'td' para visualização responsiva */
+  .table td:nth-of-type(1):before { content: "Descrição"; }
+  .table td:nth-of-type(2):before { content: "Valor"; }
+  .table td:nth-of-type(3):before { content: "Data"; }
+  .table td:nth-of-type(4):before { content: "Categoria"; }
+  .table td:nth-of-type(5):before { content: "Ação"; }
+}
 
-    .table td:before,
-    .table th:before {
-        content: attr(data-label);
-        float: left;
-        font-weight: bold;
-        width: 25%;
-    }
-
-    .gastos-title {
-        font-size: 25px;
-        font-weight: bold;
-        margin-top: 20px;
-        margin-bottom: 10px;
-    }
-
-    .text-right {
-        margin-top: 20px;
-        font-weight: bold;
-    }
+/* Melhorias visuais para botões e texto */
+.buttons-despesa {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
 }

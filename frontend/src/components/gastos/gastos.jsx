@@ -47,7 +47,7 @@ const Gastos = () => {
         };
 
         fetchData();
-    }, [navigate]);
+    }, [navigate, total]);
 
     const updateTotal = (despesas, entradas) => {
         const totalDespesas = despesas.reduce((acc, curr) => acc + curr.valor, 0);
@@ -104,11 +104,11 @@ const Gastos = () => {
                                         <td>R$ {item.valor.toFixed(2)}</td>
                                         <td>{new Date(item.data).toLocaleDateString()}</td>
                                         <td>{item.categoria}</td>
-                                        <td>
+                                        <td className='buttons-despesa'>
                                             <button onClick={() => handleDelete(item._id)} className="delete-button">❌</button>
-                                                {item.comprovante && (
-                                                    <button onClick={() => window.open(`https://mdiniz-studio-production-3796.up.railway.app/api/despesas/comprovante/${item._id}`, '_blank')} className="view-button delete-button">👁️</button>
-                                                )}
+                                            {item.comprovante && (
+                                                <button onClick={() => window.open(`https://mdiniz-studio-production-3796.up.railway.app/api/despesas/comprovante/${item._id}`, '_blank')} className="view-button delete-button">👁️</button>
+                                            )}
                                         </td>
                                     </tr>
                                 ))}
