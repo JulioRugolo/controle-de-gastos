@@ -1,7 +1,7 @@
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
-const jwtSecret = 'banana';
+const secret = process.env.SECRET;
 const bcrypt = require('bcryptjs');
 
 exports.registerUser = async (req, res) => {
@@ -21,7 +21,6 @@ exports.loginUser = async (req, res) => {
     try {
         const user = await User.findOne({ username });
         const payload = { id: user._id };
-        const secret = 'banana';
         const options = { algorithm: 'HS256', expiresIn: '1h' };
         if (!user) {
             return res.status(404).send('Usuário não encontrado!');

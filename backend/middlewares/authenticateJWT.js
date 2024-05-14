@@ -1,7 +1,9 @@
 const jwt = require('jsonwebtoken');
 
+
+
 // Chave secreta (deve ser armazenada de forma segura, por exemplo, em variáveis de ambiente)
-const secret = 'banana';
+const secret = process.env.SECRET;
 
 // Middleware de autenticação JWT
 const authenticateJWT = (req, res, next) => {
