@@ -3,12 +3,27 @@ const Despesa = require('../models/Despesa');
 // Controlador para adicionar despesa
 exports.adicionarDespesa = async (req, res) => {
   try {
-    const { descricao, valor, data, categoria, comprovantePath  } = req.body;
-    const quemGastou = req.user.id; // Corrigido para acessar req.user.id
-    const comprovantePathFull = `https://controle-gastos-production-d46b.up.railway.app/assets/${comprovantePath}`
+    const { descricao, valor, data, categoria } = req.body;
+    const quemGastou = req.user.id;
 
-    // Crie a despesa
-    const despesa = await Despesa.create({ descricao, valor, data, quemGastou, categoria, id: req.user.id, comprovantePath: comprovantePathFull });
+    let despesa = new Despesa({
+      descricao,
+      valor,
+      data,
+      quemGastou,
+      categoria,
+      id: req.user.id
+    });
+
+    if (req.file) {
+      despesa.comprovante = {
+        data: req.file.buffer,
+        contentType: req.file.mimetype
+      };
+    }
+
+    await despesa.save();
+
     return res.status(201).json({ success: true, data: despesa });
   } catch (error) {
     console.error('Erro ao adicionar despesa:', error);
@@ -63,6 +78,29 @@ exports.excluirDespesa = async (req, res) => {
     res.status(200).json({ success: true, data: despesa, message: 'Despesa excluída com sucesso' });
   } catch (error) {
     console.error('Erro ao excluir despesa:', error);
+    res.status(500).json({ success: false, error: 'Erro interno do servidor' });
+  }
+};
+
+// Controlador para consultar o comprovante de uma despesa pelo ID
+exports.consultarComprovante = async (req, res) => {
+  try {
+    const despesaId = req.params.id; // Obtenha o ID da despesa dos parâmetros de rota
+
+    // Tente encontrar a despesa especificada
+    const despesa = await Despesa.findById(despesaId);
+
+    if (!despesa || !despesa.comprovante) {
+      return res.status(404).json({ success: false, error: 'Comprovante não encontrado' });
+    }
+
+    // Defina o cabeçalho Content-Type para o tipo de conteúdo do comprovante
+    res.set('Content-Type', despesa.comprovante.contentType);
+
+    // Envie o comprovante como resposta
+    res.send(despesa.comprovante.data);
+  } catch (error) {
+    console.error('Erro ao consultar comprovante:', error);
     res.status(500).json({ success: false, error: 'Erro interno do servidor' });
   }
 };

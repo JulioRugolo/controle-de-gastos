@@ -12,65 +12,58 @@ const AdicionarDespesaForm = () => {
   const [valor, setValor] = useState('');
   const [data, setData] = useState('');
   const [categoria, setCategoria] = useState('');
-  const [comprovantePath, setComprovantePath] = useState('');
+  const [comprovante, setComprovante] = useState('');
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      const randomFileName = Math.random().toString(36).substring(2, 15);
-      const filePath = `../../assets/uploads/${randomFileName}`; // Caminho fictício, ajuste conforme seu ambiente
-      // Simulação de salvamento de arquivo
-      setComprovantePath(filePath);
-  
-      // Aqui você faria o upload para seu servidor ou serviço de armazenamento e salvaria `filePath` no estado
-      // Exemplo:
-      // uploadFileToServer(file, filePath);
+      setComprovante(file);
     }
   };
 
   // Função para lidar com o envio do formulário
   const handleSubmit = async (event) => {
-    event.preventDefault(); 
+    event.preventDefault();
+    const formData = new FormData();
+    formData.append('descricao', descricao);
+    formData.append('valor', valor);
+    formData.append('data', data);
+    formData.append('categoria', categoria);
+    formData.append('comprovante', comprovante);
 
     try {
-      const token = localStorage.getItem('token');
-      const url = 'https://controle-gastos-production-d46b.up.railway.app/api/despesas/adicionar'; // Use Banco
-      // const url = 'http://localhost:3000/api/despesas/adicionar'; // Url local
-      const response = await axios.post(url, {
-        descricao,
-        valor,
-        data,
-        categoria,
-        comprovantePath 
-      }, {
-        headers: {
-          Authorization: `Bearer ${token}` // Substitua `token` pelo token JWT do usuário autenticado
-        }
-      });
+        const token = localStorage.getItem('token');
+        const url = 'http://localhost:3000/api/despesas/adicionar';
+        const response = await axios.post(url, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                Authorization: `Bearer ${token}`
+            }
+        });
 
-      if (response.status === 201) {
-        Swal.fire({
-          icon: 'success',
-          title: 'Despesa adicionada com sucesso!',
-          showConfirmButton: false,
-          timer: 1500
-        });
-      } else {
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Algo deu errado! Por favor, tente novamente mais tarde.'
-        });
-      }
+        if (response.status === 201) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Despesa adicionada com sucesso!',
+                showConfirmButton: false,
+                timer: 1500
+            });
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Algo deu errado! Por favor, tente novamente mais tarde.'
+            });
+        }
     } catch (error) {
-      console.error('Erro ao adicionar despesa:', error.response.data.error);
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Algo deu errado! Por favor, tente novamente mais tarde.'
-      });
+        console.error('Erro ao adicionar despesa:', error.response ? error.response.data.error : error);
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Algo deu errado! Por favor, tente novamente mais tarde.'
+        });
     }
-  };
+};
 
   return (
     <div className="container mx-auto max-w-md px-4 py-8">

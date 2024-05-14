@@ -26,8 +26,9 @@ const despesaSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  comprovantePath: {
-    type: String
+  comprovante: { // Campo para armazenar o arquivo
+    data: Buffer,
+    contentType: String
   }
 });
 

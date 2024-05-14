@@ -2,9 +2,10 @@ const express = require('express');
 const router = express.Router();
 const despesasController = require('../controllers/despesasController');
 const authenticateJWT = require('../middlewares/authenticateJWT');
+const upload = require('../middlewares/multer');
 
 // Rota para adicionar despesa
-router.post('/adicionar', authenticateJWT, despesasController.adicionarDespesa);
+router.post('/adicionar', authenticateJWT, upload, despesasController.adicionarDespesa);
 
 // Rota para consultar todas as despesas
 router.get('/', authenticateJWT, despesasController.consultarDespesas);
@@ -14,6 +15,9 @@ router.get('/buscar/:lugar', authenticateJWT, despesasController.buscarDespesaPo
 
 // Rota para excluir despesa
 router.delete('/despesa/:id', despesasController.excluirDespesa);
+
+// Rota para consultar comprovante de despesa por ID
+router.get('/comprovante/:id', despesasController.consultarComprovante);
 
 
 
