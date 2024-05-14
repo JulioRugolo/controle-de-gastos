@@ -22,10 +22,10 @@ const Gastos = () => {
             setLoading(true);
             try {
                 const [resDespesas, resEntradas] = await Promise.all([
-                    axios.get('http://localhost:3000/api/despesas/', {
+                    axios.get('https://mdiniz-studio-production-3796.up.railway.app/api/despesas/', {
                         headers: { Authorization: `Bearer ${token}` }
                     }),
-                    axios.get('http://localhost:3000/api/entradas/', {
+                    axios.get('https://mdiniz-studio-production-3796.up.railway.app/api/entradas/', {
                         headers: { Authorization: `Bearer ${token}` }
                     })
                 ]);
@@ -57,7 +57,7 @@ const Gastos = () => {
 
     const handleDelete = async (id, isDespesa = true) => {
         const token = localStorage.getItem('token');
-        const url = isDespesa ? `http://localhost:3000/api/despesas/despesa/${id}` : `http://localhost:3000/api/entradas/${id}`;
+        const url = isDespesa ? `https://mdiniz-studio-production-3796.up.railway.app/api/despesas/despesa/${id}` : `https://mdiniz-studio-production-3796.up.railway.app/api/entradas/${id}`;
         try {
             const response = await axios.delete(url, {
                 headers: { Authorization: `Bearer ${token}` }
@@ -99,12 +99,13 @@ const Gastos = () => {
                             </thead>
                             <tbody>
                                 {combinedData.map(item => (
-                                    <tr key={item._id}>
+                                    <tr key={item._id} className={item.categoria !== 'Salário' ? 'despesa-row' : ''}>
                                         <td>{item.descricao}</td>
                                         <td>R$ {item.valor.toFixed(2)}</td>
                                         <td>{new Date(item.data).toLocaleDateString()}</td>
                                         <td>{item.categoria}</td>
-                                        <td><button onClick={() => handleDelete(item._id, item.tipo === 'despesa')} className="delete-button">❌</button></td>
+                                        
+                                        <td>{item.categoria === 'Salário' ? '' : <button onClick={() => handleDelete(item._id, item.categoria !== 'Salário')} className="delete-button">❌</button>}</td>
                                     </tr>
                                 ))}
                             </tbody>

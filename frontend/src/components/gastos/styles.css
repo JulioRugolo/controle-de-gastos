@@ -24,6 +24,10 @@
     font-weight: bold;
     margin-top: 20px;
   }
+
+  .despesa-row {
+    background-color: #f8d7da; /* Cor vermelho claro */
+}
   /* Estilos para a responsividade da tabela */
  /* Estilos para a responsividade da tabela */
 @media (max-width: 768px) {

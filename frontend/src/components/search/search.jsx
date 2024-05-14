@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
+import './style.css'
 
 const formatarValor = (valor) => {
   const formatter = new Intl.NumberFormat('pt-BR', {
@@ -41,7 +42,7 @@ const BuscaPorNome = () => {
   };
 
   return (
-    <div>
+    <div className='search-container'>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -54,7 +55,7 @@ const BuscaPorNome = () => {
         </button>
       </form>
       {resultados.length > 0 && (
-        <div>
+        <div className='result'>
           <h2>Resultados da Busca</h2>
           <div className="table-responsive">
             <table className="table">
@@ -69,7 +70,7 @@ const BuscaPorNome = () => {
               <tbody>
                 {resultados.map((resultado) => (
                   <tr key={resultado._id}>
-                    <td>{resultado.lugar}</td>
+                    <td>{resultado.descricao}</td>
                     <td>{formatarValor(resultado.valor)}</td>
                     <td>{formatarData(resultado.data)}</td>
                     <td>{resultado.categoria}</td>

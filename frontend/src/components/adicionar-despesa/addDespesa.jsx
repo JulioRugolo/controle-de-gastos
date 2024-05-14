@@ -19,7 +19,7 @@ const AdicionarDespesaForm = () => {
 
     try {
       const token = localStorage.getItem('token');
-      const url = 'http://localhost:3000/api/despesas/adicionar'; // Use a URL correta
+      const url = 'https://mdiniz-studio-production-3796.up.railway.app/api/despesas/adicionar'; // Use a URL correta
       const response = await axios.post(url, {
         descricao,
         valor,
