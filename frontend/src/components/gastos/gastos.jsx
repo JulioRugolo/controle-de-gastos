@@ -99,13 +99,13 @@ const Gastos = () => {
                             </thead>
                             <tbody>
                                 {combinedData.map(item => (
-                                    <tr key={item._id} className={item.categoria !== 'Salário' ? 'despesa-row' : ''}>
+                                    <tr key={item._id} className={item.categoria !== ('Salário' || 'Aluguel') ? 'despesa-row' : ''}>
                                         <td>{item.descricao}</td>
-                                        <td>R$ {item.valor.toFixed(2)}</td>
+                                        <td>{item.categoria === ('Salário' || 'Aluguel') ? `R$${item.valor.toFixed(2)}` : `-R$${item.valor.toFixed(2)}`}</td>
                                         <td>{new Date(item.data).toLocaleDateString()}</td>
                                         <td>{item.categoria}</td>
                                         
-                                        <td>{item.categoria === 'Salário' ? '' : <button onClick={() => handleDelete(item._id, item.categoria !== 'Salário')} className="delete-button">❌</button>}</td>
+                                        <td>{item.categoria === ('Salário' || 'Aluguel') ? '' : <button onClick={() => handleDelete(item._id, item.categoria !== 'Salário')} className="delete-button">❌</button>}</td>
                                     </tr>
                                 ))}
                             </tbody>
