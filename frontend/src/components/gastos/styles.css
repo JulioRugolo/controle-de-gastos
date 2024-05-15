@@ -62,21 +62,10 @@
 .export-button:hover {
   background-color: darkblue;
 }
-.gastos-title {
-  font-size: 2rem; /* Tamanho do título */
-  margin-top: 130px; /* Espaço acima do título */
-  margin-bottom: 20px;
-  font-weight: bold; /* Negrito */
-}
+
 
 /* Estilos para responsividade */
 @media (max-width: 768px) {
-  .gastos-title {
-    font-size: 1.5rem; /* Tamanho maior para o título */
-    margin-top: 120px;
-    font-weight: bold;
-    font-size: 25px;
-  }
 
   .table {
     margin-top: 30px;

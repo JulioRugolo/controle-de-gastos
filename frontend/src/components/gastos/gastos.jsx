@@ -110,7 +110,7 @@ const Gastos = () => {
       };
 
     return (
-        <div>
+        <div className='section'>
             <h2 className='page-title gastos-title'>Gastos e Entradas</h2>
             {loading && <div className="loader"></div>}
             {!loading && (
@@ -136,8 +136,7 @@ const Gastos = () => {
                                         <td className='buttons-despesa'>
                                             <button onClick={() => handleDelete(item._id)} className="delete-button">{item.categoria !== 'Salário' ? '❌' : '' }</button>
                                             {item.comprovante && (
-                                                <button onClick={() => window.open(`3
-                                                /api/despesas/comprovante/${item._id}`, '_blank')} className="view-button delete-button">👁️</button>
+                                                <button onClick={() => window.open(`https://backend.controledegastos.app.br/api/despesas/comprovante/${item._id}`, '_blank')} className="view-button delete-button">👁️</button>
                                             )}
                                         </td>
                                     </tr>

@@ -76,7 +76,7 @@ const AdicionarDespesaForm = () => {
 };
 
   return (
-    <div className="container mx-auto max-w-md px-4 py-8">
+    <div className="section mx-auto max-w-md px-4 py-8">
       <h2 className='page-title'>Adicionar Despesas</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>

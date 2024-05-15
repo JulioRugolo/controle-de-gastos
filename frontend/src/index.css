@@ -80,6 +80,15 @@ input, select {
   padding: 0;
 }
 
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+  margin: 0 auto;
+}	
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #4a5568; /* Um tom de cinza para melhor leitura e consistência */
