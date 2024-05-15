@@ -1,0 +1,15 @@
+{
+    "name": "Controle de Gastos",
+    "short_name": "Controle de Gastos",
+    "start_url": "/index.html",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#064b9b",
+    "icons": [
+        {
+            "src": "/src/assets/apple-touch-icon-180x180.png",
+            "sizes": "180x180",
+            "type": "image/png"
+        }
+    ]
+}
