@@ -1,9 +1,10 @@
 // Importe useState do React
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 // Importe o SweetAlert para mensagens de sucesso ou erro
 import Swal from 'sweetalert2';
 import './style.css';
+import { useNavigate } from 'react-router-dom';
 
 // Componente do formulário de adicionar despesa
 const AdicionarDespesaForm = () => {
@@ -13,6 +14,7 @@ const AdicionarDespesaForm = () => {
   const [data, setData] = useState('');
   const [categoria, setCategoria] = useState('');
   const [comprovante, setComprovante] = useState('');
+  const navigate = useNavigate();
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -20,6 +22,14 @@ const AdicionarDespesaForm = () => {
       setComprovante(file);
     }
   };
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+        if (!token) {
+            navigate('/login');
+            return;
+        }
+  }, [navigate]);
 
   // Função para lidar com o envio do formulário
   const handleSubmit = async (event) => {
