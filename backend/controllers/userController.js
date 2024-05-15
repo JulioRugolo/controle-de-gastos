@@ -5,10 +5,17 @@ const secret = process.env.SECRET;
 const bcrypt = require('bcryptjs');
 
 exports.registerUser = async (req, res) => {
-    const { username, password } = req.body;
+    const { name, email, password, confirmPassword } = req.body;
+    if (password !== confirmPassword) {
+        return res.status(400).send('As senhas não coincidem!');
+    }
     try {
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            return res.status(400).send('Usuário já registrado com esse email!');
+        }
         const hashedPassword = await bcrypt.hash(password, 10);
-        const newUser = new User({ username, password: hashedPassword });
+        const newUser = new User({ name, email, password: hashedPassword });
         await newUser.save();
         res.status(201).send('Usuário registrado com sucesso!');
     } catch (error) {
@@ -17,18 +24,18 @@ exports.registerUser = async (req, res) => {
 };
 
 exports.loginUser = async (req, res) => {
-    const { username, password } = req.body;
+    const { email, password } = req.body;
     try {
-        const user = await User.findOne({ username });
-        const payload = { id: user._id };
-        const options = { algorithm: 'HS256' };
+        const user = await User.findOne({ email });
         if (!user) {
             return res.status(404).send('Usuário não encontrado!');
         }
         const isMatch = await bcrypt.compare(password, user.password);
         if (isMatch) {
+            const payload = { id: user._id };
+            const options = { algorithm: 'HS256' };
             const token = jwt.sign(payload, secret, options);
-            console.log('Usuário autenticado:', user.username + ' com token: ' + token);
+            console.log('Usuário autenticado:', user.email + ' com token: ' + token);
             res.status(200).json({ token });
         } else {
             res.status(400).send('Senha incorreta!');
