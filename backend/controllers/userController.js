@@ -21,7 +21,7 @@ exports.loginUser = async (req, res) => {
     try {
         const user = await User.findOne({ username });
         const payload = { id: user._id };
-        const options = { algorithm: 'HS256', expiresIn: '1h' };
+        const options = { algorithm: 'HS256' };
         if (!user) {
             return res.status(404).send('Usuário não encontrado!');
         }
