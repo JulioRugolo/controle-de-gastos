@@ -156,14 +156,25 @@ exports.gerarPDF = async (req, res) => {
     doc.moveDown(2);
 
     despesas.forEach(despesa => {
-      doc.addPage();
-      if (despesa.comprovante) {
-        const imageWidth = 300;
-        const xPosition = (doc.page.width - imageWidth) / 2;
-    
-        doc.image(Buffer.from(despesa.comprovante.data, 'base64'), xPosition, doc.y, {
-          fit: [350, 400]
-        });
+      if (despesa.comprovante && despesa.comprovante.data) {
+        // Verifique se o comprovante tem dados
+        try {
+          // Tente criar um Buffer a partir dos dados
+          const imageBuffer = Buffer.from(despesa.comprovante.data, 'base64');
+          
+          // Adicione uma nova página ao documento
+          doc.addPage();
+          
+          const imageWidth = 300;
+          const xPosition = (doc.page.width - imageWidth) / 2;
+          
+          // Adicione a imagem ao documento
+          doc.image(imageBuffer, xPosition, doc.y, {
+            fit: [350, 400]
+          });
+        } catch (error) {
+          console.log(`Erro ao processar a imagem para a despesa: ${despesa.id}`);
+        }
       }
     });
     
