@@ -1,8 +1,10 @@
+import Header from '../header/header';
 import './style.css'
 
 function home() {
     return (
         <>
+            <Header user={localStorage.getItem('user')} />
             <div className='banner'>
                 <h1>Bem-vindo ao seu aplicativo de controle de gastos!</h1>
             </div>

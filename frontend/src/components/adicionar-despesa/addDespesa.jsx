@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import './style.css';
 import { useNavigate } from 'react-router-dom';
+import Header from '../header/header';
 
 // Componente do formulário de adicionar despesa
 const AdicionarDespesaForm = () => {
@@ -85,50 +86,53 @@ const AdicionarDespesaForm = () => {
 };
 
   return (
-    <div className="section mx-auto max-w-md px-4 py-8">
-      <h2 className='page-title'>Adicionar Despesas</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label htmlFor="descricao" className="block text-sm font-medium text-gray-700">Descrição:</label>
-          <input type="text" id="descricao" name="descricao" value={descricao} onChange={(e) => setDescricao(e.target.value)} className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" required />
-        </div>
-        <div>
-          <label htmlFor="valor" className="block text-sm font-medium text-gray-700">Valor:</label>
-          <input type="number" id="valor" name="valor" value={valor} onChange={(e) => setValor(e.target.value)} className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" required />
-        </div>
-        <div>
-          <label htmlFor="data" className="block text-sm font-medium text-gray-700">Data:</label>
-          <input type="date" id="data" name="data" value={data} onChange={(e) => setData(e.target.value)} className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" required />
-        </div>
-        <div>
-          <label htmlFor="categoria" className="block text-sm font-medium text-gray-700">Categoria:</label>
-          <select id="categoria" name="categoria" value={categoria} onChange={(e) => setCategoria(e.target.value)} className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-            <option value="">Selecione uma categoria</option>
-            <option value="Alimentação">Alimentação</option>
-            <option value="Carta">Cartão</option>
-            <option value="Contas">Contas</option>
-            <option value="Crianças">Crianças</option>
-            <option value="Gasolina">Gasolina</option>
-            <option value="Lazer">Lazer</option>
-            <option value="Moradia">Moradia</option>
-            <option value="Studio">Studio</option>
-            <option value="Outros">Outros</option>
-            {/* Adicione outras opções de categoria conforme necessário */}
-          </select>
-        </div>
-        <div>
-          <input
-            type="file"
-            id="comprovante"
-            name="comprovante"
-            accept='image/*,application/pdf'
-            onChange={handleFileChange}
-            className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-          />
-        </div>
-        <button type="submit" className="submit-button w-full bg-indigo-600 text-white py-3 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Adicionar Despesa</button>
-      </form>
-    </div>
+    <>
+      <Header user={localStorage.getItem('user')} />
+      <div className="section mx-auto max-w-md px-4 py-8">
+        <h2 className='page-title'>Adicionar Despesas</h2>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label htmlFor="descricao" className="block text-sm font-medium text-gray-700">Descrição:</label>
+            <input type="text" id="descricao" name="descricao" value={descricao} onChange={(e) => setDescricao(e.target.value)} className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" required />
+          </div>
+          <div>
+            <label htmlFor="valor" className="block text-sm font-medium text-gray-700">Valor:</label>
+            <input type="number" id="valor" name="valor" value={valor} onChange={(e) => setValor(e.target.value)} className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" required />
+          </div>
+          <div>
+            <label htmlFor="data" className="block text-sm font-medium text-gray-700">Data:</label>
+            <input type="date" id="data" name="data" value={data} onChange={(e) => setData(e.target.value)} className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" required />
+          </div>
+          <div>
+            <label htmlFor="categoria" className="block text-sm font-medium text-gray-700">Categoria:</label>
+            <select id="categoria" name="categoria" value={categoria} onChange={(e) => setCategoria(e.target.value)} className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+              <option value="">Selecione uma categoria</option>
+              <option value="Alimentação">Alimentação</option>
+              <option value="Carta">Cartão</option>
+              <option value="Contas">Contas</option>
+              <option value="Crianças">Crianças</option>
+              <option value="Gasolina">Gasolina</option>
+              <option value="Lazer">Lazer</option>
+              <option value="Moradia">Moradia</option>
+              <option value="Studio">Studio</option>
+              <option value="Outros">Outros</option>
+              {/* Adicione outras opções de categoria conforme necessário */}
+            </select>
+          </div>
+          <div>
+            <input
+              type="file"
+              id="comprovante"
+              name="comprovante"
+              accept='image/*,application/pdf'
+              onChange={handleFileChange}
+              className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            />
+          </div>
+          <button type="submit" className="submit-button w-full bg-indigo-600 text-white py-3 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Adicionar Despesa</button>
+        </form>
+      </div>
+    </>
   );
 };
 

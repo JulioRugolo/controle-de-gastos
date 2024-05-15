@@ -17,6 +17,14 @@
       padding-left: 1rem;
       padding-right: 1rem;
     }
+    .welcome {
+      position: fixed;
+      top: 20px;
+      right: 50px;
+      font-size: 1em;
+      font-weight: 500;
+      margin: 0 0 0 1em;
+    }
   }
   
   /* Estilos para dispositivos maiores */
@@ -24,6 +32,14 @@
     /* Define estilos para o menu no modo desktop */
     .lg\:hidden {
       display: block;
+    }
+    .welcome {
+      position: fixed;
+      top: 30px;
+      right: 400px;
+      font-size: 0.7em;
+      font-weight: 500;
+      margin: 0 0 0 1em;
     }
   }
   

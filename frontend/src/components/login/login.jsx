@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './login.css'; // Importar o arquivo CSS
 import Swal from 'sweetalert2';
+import Header from '../header/header';
 
 function LoginForm() {
   const [email, setEmail] = useState('');
@@ -12,12 +13,14 @@ function LoginForm() {
   const handleLogin = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post('https://backend.controledegastos.app.br/api/users/login', {
+      const response = await axios.post('http://localhost:3000/api/users/login', {
         email: email.toUpperCase(),
         password
       });
       if (response.data.token) {
         localStorage.setItem('token', response.data.token);
+        console.log(response.data);
+        localStorage.setItem('user', response.data.name);
         // Redirecionar para a página de dashboard
         navigate('/gastos');
       } else {
@@ -39,6 +42,7 @@ function LoginForm() {
 
   return (
     <>
+      <Header user={''} />
       <div className='section'>
         <h1 className='page-title'>Login</h1>
         <div className="form-container">

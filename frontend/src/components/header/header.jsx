@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 import './header.css';
+import PropTypes from 'prop-types';
 
-const Header = () => {
+const Header = (props) => {
   const [isMobile, setIsMobile] = useState(false);
   const [navOpen, setNavOpen] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false); // Adicione o estado para controlar se o usuário está logado
+  const { user } = props;
 
   useEffect(() => {
     const handleResize = () => {
@@ -42,6 +44,7 @@ const Header = () => {
   const handleLogout = () => {
     // Remove o token do localStorage
     localStorage.removeItem('token');
+    localStorage.removeItem('userEmail');
     // Atualiza o estado loggedIn para false
     setLoggedIn(false);
   };
@@ -69,16 +72,21 @@ const Header = () => {
           </button>
         </div>
       )}
-
+      {!navOpen && <p className='welcome'>{user ? `Olá, ${user}` : ''}</p>}
       {!isMobile && renderNavItems()}
-
       {isMobile && navOpen && (
-        <ul className='mobile-nav'>
-          {renderNavItems()}
-        </ul>
+        <>
+          <ul className='mobile-nav'>
+            {renderNavItems()}
+          </ul>
+        </>
       )}
     </div>
   );
+};
+
+Header.propTypes = {
+  user: PropTypes.string
 };
 
 export default Header;

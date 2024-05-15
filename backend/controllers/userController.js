@@ -22,8 +22,8 @@ exports.registerUser = async (req, res) => {
 
 exports.loginUser = async (req, res) => {
     const { email, password } = req.body;
+    const user = await User.findOne({ email });
     try {
-        const user = await User.findOne({ email });
         if (!user) {
             return res.status(404).send('Usuário não encontrado!');
         }
@@ -32,8 +32,7 @@ exports.loginUser = async (req, res) => {
             const payload = { id: user._id };
             const options = { algorithm: 'HS256' };
             const token = jwt.sign(payload, secret, options);
-            console.log('Usuário autenticado:', user.email + ' com token: ' + token);
-            res.status(200).json({ token });
+            res.status(200).json({ token, name: user.name });
         } else {
             res.status(400).send('Senha incorreta!');
         }

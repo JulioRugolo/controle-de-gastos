@@ -3,6 +3,7 @@ import axios from 'axios';
 import GraficoPizza from './graficopizza';
 import './styles.css';
 import { useNavigate } from 'react-router-dom';
+import Header from '../header/header';
 
 const Gastos = () => {
     const [gastos, setGastos] = useState([]);
@@ -110,49 +111,52 @@ const Gastos = () => {
       };
 
     return (
-        <div className='section'>
-            <h2 className='page-title gastos-title'>Gastos e Entradas</h2>
-            {loading && <div className="loader"></div>}
-            {!loading && (
-                <div>
-                    <div className="overflow-x-auto">
-                        <table className="table">
-                            <thead>
-                                <tr>
-                                    <th>Data</th>
-                                    <th>Descrição</th>
-                                    <th>Valor</th>
-                                    <th>Categoria</th>
-                                    <th>Ação</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {combinedData.map(item => (
-                                    <tr key={item._id}>
-                                        <td>{new Date(item.data).toLocaleDateString()}</td>
-                                        <td>{item.descricao}</td>
-                                        <td>{item.categoria !== 'Salário' ? '-R$' : '+R$' }{item.valor.toFixed(2)}</td>
-                                        <td>{item.categoria}</td>
-                                        <td className='buttons-despesa'>
-                                            <button onClick={() => handleDelete(item._id)} className="delete-button">{item.categoria !== 'Salário' ? '❌' : '' }</button>
-                                            {item.comprovante && (
-                                                <button onClick={() => window.open(`https://backend.controledegastos.app.br/api/despesas/comprovante/${item._id}`, '_blank')} className="view-button delete-button">👁️</button>
-                                            )}
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
+        <>
+            <Header user={localStorage.getItem('user')} />
+            <div className='section'>
+                <h2 className='page-title gastos-title'>Gastos e Entradas</h2>
+                {loading && <div className="loader"></div>}
+                {!loading && (
                     <div>
-                        <p className="text-right">Saldo Atual: R$ {total.toFixed(2)}</p>
-                        <button onClick={exportarPDF} className="export-button">Exportar PDF</button>
+                        <div className="overflow-x-auto">
+                            <table className="table">
+                                <thead>
+                                    <tr>
+                                        <th>Data</th>
+                                        <th>Descrição</th>
+                                        <th>Valor</th>
+                                        <th>Categoria</th>
+                                        <th>Ação</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {combinedData.map(item => (
+                                        <tr key={item._id}>
+                                            <td>{new Date(item.data).toLocaleDateString()}</td>
+                                            <td>{item.descricao}</td>
+                                            <td>{item.categoria !== 'Salário' ? '-R$' : '+R$' }{item.valor.toFixed(2)}</td>
+                                            <td>{item.categoria}</td>
+                                            <td className='buttons-despesa'>
+                                                <button onClick={() => handleDelete(item._id)} className="delete-button">{item.categoria !== 'Salário' ? '❌' : '' }</button>
+                                                {item.comprovante && (
+                                                    <button onClick={() => window.open(`https://backend.controledegastos.app.br/api/despesas/comprovante/${item._id}`, '_blank')} className="view-button delete-button">👁️</button>
+                                                )}
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div>
+                            <p className="text-right">Saldo Atual: R$ {total.toFixed(2)}</p>
+                            <button onClick={exportarPDF} className="export-button">Exportar PDF</button>
 
+                        </div>
+                        <GraficoPizza data={combinedData} />
                     </div>
-                    <GraficoPizza data={combinedData} />
-                </div>
-            )}
-        </div>
+                )}
+            </div>
+        </>
     );
 };
 
