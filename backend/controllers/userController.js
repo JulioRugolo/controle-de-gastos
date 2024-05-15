@@ -5,10 +5,7 @@ const secret = process.env.SECRET;
 const bcrypt = require('bcryptjs');
 
 exports.registerUser = async (req, res) => {
-    const { name, email, password, confirmPassword } = req.body;
-    if (password !== confirmPassword) {
-        return res.status(400).send('As senhas não coincidem!');
-    }
+    const { name, email, password } = req.body;
     try {
         const existingUser = await User.findOne({ email });
         if (existingUser) {
