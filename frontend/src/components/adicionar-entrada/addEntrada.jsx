@@ -18,7 +18,7 @@ const AdicionarEntradaForm = () => {
   useEffect(() => {
     const token = localStorage.getItem('token');
         if (!token) {
-          navigate('/login');
+          
             return;
         }
   }, [navigate]);
@@ -26,7 +26,9 @@ const AdicionarEntradaForm = () => {
   // Função para lidar com o envio do formulário
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    const submitButton = document.getElementsByClassName('submit-button')[0];
+    submitButton.disabled = true;
+    submitButton.textContent = 'Enviando...';
     try {
       const token = localStorage.getItem('token');
       const url = 'https://backend.controledegastos.app.br/api/entradas/adicionar'; // Use a URL correta
@@ -48,12 +50,16 @@ const AdicionarEntradaForm = () => {
           showConfirmButton: false,
           timer: 1500
         });
+        submitButton.disabled = false;
+        submitButton.textContent = 'Adicionar Entrada';
       } else {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
           text: 'Algo deu errado! Por favor, tente novamente mais tarde.'
         });
+        submitButton.disabled = false;
+        submitButton.textContent = 'Adicionar Entrada';
       }
     } catch (error) {
       console.error('Erro ao adicionar entrada:', error.response.data.error);
@@ -62,6 +68,8 @@ const AdicionarEntradaForm = () => {
         title: 'Oops...',
         text: 'Algo deu errado! Por favor, tente novamente mais tarde.'
       });
+      submitButton.disabled = false;
+      submitButton.textContent = 'Adicionar Entrada';
     }
   };
 
@@ -70,7 +78,7 @@ const AdicionarEntradaForm = () => {
       <h2 className='page-title'>Adicionar Entradas</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label htmlFor="origem" className="block text-sm font-medium text-gray-700">Origem:</label>
+          <label htmlFor="origem" className="block text-sm font-medium text-gray-700">Descrição:</label>
           <input type="text" id="origem" name="origem" value={descricao} onChange={(e) => setDescricao(e.target.value)} className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" required />
         </div>
         <div>
@@ -93,7 +101,7 @@ const AdicionarEntradaForm = () => {
             {/* Adicione outras opções de categoria conforme necessário */}
           </select>
         </div>
-        <button type="submit" className="w-full bg-indigo-600 text-white py-3 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Adicionar Entrada</button>
+        <button type="submit" className="submit-button w-full bg-indigo-600 text-white py-3 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Adicionar Entrada</button>
       </form>
     </div>
   );

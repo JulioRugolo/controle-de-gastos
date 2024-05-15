@@ -26,13 +26,16 @@ const AdicionarDespesaForm = () => {
   useEffect(() => {
     const token = localStorage.getItem('token');
         if (!token) {
-            navigate('/login');
+            
             return;
         }
   }, [navigate]);
 
   // Função para lidar com o envio do formulário
   const handleSubmit = async (event) => {
+    const submitButton = document.getElementsByClassName('submit-button')[0];
+    submitButton.disabled = true;
+    submitButton.textContent = 'Enviando...';
     event.preventDefault();
     const formData = new FormData();
     formData.append('descricao', descricao);
@@ -58,12 +61,16 @@ const AdicionarDespesaForm = () => {
                 showConfirmButton: false,
                 timer: 1500
             });
+            submitButton.disabled = false;
+            submitButton.textContent = 'Adicionar Despesa';
         } else {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
                 text: 'Algo deu errado! Por favor, tente novamente mais tarde.'
             });
+            submitButton.disabled = false;
+            submitButton.textContent = 'Adicionar Despesa';
         }
     } catch (error) {
         console.error('Erro ao adicionar despesa:', error.response ? error.response.data.error : error);
@@ -72,6 +79,8 @@ const AdicionarDespesaForm = () => {
             title: 'Oops...',
             text: 'Algo deu errado! Por favor, tente novamente mais tarde.'
         });
+        submitButton.disabled = false;
+        submitButton.textContent = 'Adicionar Despesa';
     }
 };
 
@@ -117,7 +126,7 @@ const AdicionarDespesaForm = () => {
             className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           />
         </div>
-        <button type="submit" className="w-full bg-indigo-600 text-white py-3 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Adicionar Despesa</button>
+        <button type="submit" className="submit-button w-full bg-indigo-600 text-white py-3 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Adicionar Despesa</button>
       </form>
     </div>
   );

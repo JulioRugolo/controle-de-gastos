@@ -2,10 +2,10 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './login.css'; // Importar o arquivo CSS
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 
 function LoginForm() {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
@@ -13,7 +13,7 @@ function LoginForm() {
     event.preventDefault();
     try {
       const response = await axios.post('https://backend.controledegastos.app.br/api/users/login', {
-        username: username.toUpperCase(),
+        email: email.toUpperCase(),
         password
       });
       if (response.data.token) {
@@ -39,26 +39,30 @@ function LoginForm() {
 
   return (
     <>
-      <h1 className='title'>Login</h1>
-      <div className="form-container">
-        <form onSubmit={handleLogin}>
-          <input
-            type="text"
-            value={username}
-            onChange={e => setUsername(e.target.value)}
-            placeholder="Username"
-          />
-          <input
-            type="password"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-            placeholder="Password"
-          />
-          <button type="submit">Login</button>
-        </form>
-        <p className='no-account'>Não tem uma conta? <a href='/register'>Registre-se</a></p>
+      <div className='section'>
+        <h1 className='page-title'>Login</h1>
+        <div className="form-container">
+          <form onSubmit={handleLogin}>
+            <input
+              type="email"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              placeholder="Email"
+              required
+            />
+            <input
+              type="password"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              placeholder="Password"
+              required
+            />
+            <button type="submit">Login</button>
+          </form>
+          <p className='no-account'>Não tem uma conta? <a href='/register'>Registre-se</a></p>
+        </div>
       </div>
-  </>
+    </>
   );
 }
 

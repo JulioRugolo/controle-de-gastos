@@ -1,53 +1,95 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import './login.css'; // Importe o arquivo CSS para aplicar os estilos
+import './login.css'; // Importar o arquivo CSS
+import Swal from 'sweetalert2';
 
 function RegisterForm() {
-  const [username, setUsername] = useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const navigate = useNavigate();
 
   const handleRegister = async (event) => {
     event.preventDefault();
+    if (password !== confirmPassword) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "As senhas não coincidem!",
+      });
+      return;
+    }
+
     try {
       const response = await axios.post('https://backend.controledegastos.app.br/api/users/register', {
-        username: username.toUpperCase(),
+        name,
+        email: email.toUpperCase(),
         password
       });
-
-      if (response.status === 201) {
-        // Tratar sucesso de registro
-        console.log('Registro bem-sucedido!');
-        // Redirecionar para a página de login após o registro bem-sucedido
+      if (response.data.success) {
+        Swal.fire({
+          icon: "success",
+          title: "Registrado com sucesso!",
+          text: "Você será redirecionado para a página de login.",
+        });
         navigate('/login');
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Erro ao registrar, tente novamente!",
+        });
       }
     } catch (error) {
-      console.error('Erro de registro:', error.response.data);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Erro ao registrar, tente novamente!",
+      });
     }
   };
 
   return (
     <>
-        <h1 className='title'>Registre-se</h1>
-        <div className="form-container"> {/* Adicione o className 'form-container' */}
-        <form onSubmit={handleRegister}>
+      <div className='section'>
+        <h1 className='page-title'>Registro</h1>
+        <div className="form-container">
+          <form onSubmit={handleRegister}>
             <input
-            type="text"
-            value={username}
-            onChange={e => setUsername(e.target.value)}
-            placeholder="Username"
+              type="text"
+              value={name}
+              onChange={e => setName(e.target.value)}
+              placeholder="Nome"
+              required
             />
             <input
-            type="password"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-            placeholder="Password"
+              type="email"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              placeholder="Email"
+              required
+            />
+            <input
+              type="password"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              placeholder="Senha"
+              required
+            />
+            <input
+              type="password"
+              value={confirmPassword}
+              onChange={e => setConfirmPassword(e.target.value)}
+              placeholder="Confirme a Senha"
+              required
             />
             <button type="submit">Registrar</button>
-        </form>
-        <p className='no-account'>Já tem uma conta? <a href='/login'>Login</a></p>
+          </form>
+          <p className='no-account'>Não tem uma conta? <a href='/login'>Login</a></p>
         </div>
+      </div>
     </>
   );
 }

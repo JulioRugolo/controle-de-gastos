@@ -17,6 +17,12 @@ a:hover {
   border-radius: 10px;
 }
 
+.submit-button:disabled {
+  color: #a0aec0; /* Um cinza mais escuro para links desativados */
+  cursor: not-allowed;
+  background-color: #1a202c;
+}
+
 body {
 
   width: 100%;

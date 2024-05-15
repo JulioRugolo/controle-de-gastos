@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import './style.css'
+import { useNavigate } from 'react-router-dom';
 
 const formatarValor = (valor) => {
   const formatter = new Intl.NumberFormat('pt-BR', {
@@ -18,6 +19,16 @@ const BuscaPorNome = () => {
   const [lugar, setLugar] = useState('');
   const [resultados, setResultados] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            navigate('/login');
+            return;
+        }
+      }, [navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
