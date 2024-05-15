@@ -12,7 +12,7 @@ function LoginForm() {
   const handleLogin = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post('https://mdiniz-studio-production-3796.up.railway.app/api/users/login', {
+      const response = await axios.post('https://backend.controledegastos.app.br/api/users/login', {
         username: username.toUpperCase(),
         password
       });

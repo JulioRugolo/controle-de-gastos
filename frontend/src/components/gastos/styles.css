@@ -13,7 +13,7 @@
 
 /* Estilização dos botões */
 .delete-button {
-  background-color: rgb(220, 53, 69); /* Cor vermelha */
+  background-color: rgb(255, 255, 255); /* Cor vermelha */
   color: white;
   border: none;
   padding: 5px 10px;
@@ -61,6 +61,12 @@
 
 .export-button:hover {
   background-color: darkblue;
+}
+.gastos-title {
+  font-size: 2rem; /* Tamanho do título */
+  margin-top: 130px; /* Espaço acima do título */
+  margin-bottom: 20px;
+  font-weight: bold; /* Negrito */
 }
 
 /* Estilos para responsividade */

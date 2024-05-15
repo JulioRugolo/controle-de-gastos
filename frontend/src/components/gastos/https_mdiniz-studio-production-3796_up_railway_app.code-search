@@ -1,0 +1,50 @@
+# Query: https://mdiniz-studio-production-3796.up.railway.app
+# ContextLines: 1
+
+11 resultados - 6 arquivos
+
+frontend\src\components\adicionar-despesa\addDespesa.jsx:
+  35          const token = localStorage.getItem('token');
+  36:         const url = 'https://backend.controledegastos.app.br/api/despesas/adicionar';
+  37          const response = await axios.post(url, formData, {
+
+frontend\src\components\adicionar-entrada\addEntrada.jsx:
+  21        const token = localStorage.getItem('token');
+  22:       const url = 'https://backend.controledegastos.app.br/api/entradas/adicionar'; // Use a URL correta
+  23        const response = await axios.post(url, {
+
+frontend\src\components\gastos\gastos.jsx:
+
+   24                  const [resDespesas, resEntradas] = await Promise.all([
+   25:                     axios.get('https://backend.controledegastos.app.br/api/despesas/', {
+   26                          headers: { Authorization: `Bearer ${token}` }
+   27                      }),
+   28:                     axios.get('https://backend.controledegastos.app.br/api/entradas/', {
+   29                          headers: { Authorization: `Bearer ${token}` }
+
+   59          const token = localStorage.getItem('token');
+   60:         const url = isDespesa ? `https://backend.controledegastos.app.br/api/despesas/despesa/${id}` : `https://backend.controledegastos.app.br/api/entradas/${id}`;
+   61          try {
+
+   94            // Faça a requisição e receba o Blob como resposta
+   95:           const response = await axios.get('https://backend.controledegastos.app.br/api/despesas/pdf', config);
+   96        
+
+  138                                              {item.comprovante && (
+  139:                                                 <button onClick={() => window.open(`https://backend.controledegastos.app.br/api/despesas/comprovante/${item._id}`, '_blank')} className="view-button delete-button">👁️</button>
+  140                                              )}
+
+frontend\src\components\login\login.jsx:
+  14      try {
+  15:       const response = await axios.post('https://backend.controledegastos.app.br/api/users/login', {
+  16          username: username.toUpperCase(),
+
+frontend\src\components\login\register.jsx:
+  13      try {
+  14:       const response = await axios.post('https://backend.controledegastos.app.br/api/users/register', {
+  15          username: username.toUpperCase(),
+
+frontend\src\components\search\search.jsx:
+  27        // Faça a solicitação GET para buscar despesas por nome
+  28:       const response = await axios.get(`https://backend.controledegastos.app.br/api/despesas/buscar/${lugar}`, {
+  29                      headers: {

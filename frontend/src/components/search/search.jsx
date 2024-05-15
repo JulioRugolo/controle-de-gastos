@@ -25,7 +25,7 @@ const BuscaPorNome = () => {
       setLoading(true);
       const token = localStorage.getItem('token');
       // Faça a solicitação GET para buscar despesas por nome
-      const response = await axios.get(`https://mdiniz-studio-production-3796.up.railway.app/api/despesas/buscar/${lugar}`, {
+      const response = await axios.get(`https://backend.controledegastos.app.br/api/despesas/buscar/${lugar}`, {
                     headers: {
                         Authorization: `Bearer ${token}` // Adiciona o token ao cabeçalho da requisição
                     }

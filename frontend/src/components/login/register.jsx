@@ -11,7 +11,7 @@ function RegisterForm() {
   const handleRegister = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post('https://mdiniz-studio-production-3796.up.railway.app/api/users/register', {
+      const response = await axios.post('https://backend.controledegastos.app.br/api/users/register', {
         username: username.toUpperCase(),
         password
       });

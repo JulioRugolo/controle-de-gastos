@@ -19,7 +19,7 @@ const AdicionarEntradaForm = () => {
 
     try {
       const token = localStorage.getItem('token');
-      const url = 'https://mdiniz-studio-production-3796.up.railway.app/api/entradas/adicionar'; // Use a URL correta
+      const url = 'https://backend.controledegastos.app.br/api/entradas/adicionar'; // Use a URL correta
       const response = await axios.post(url, {
         descricao,
         valor,

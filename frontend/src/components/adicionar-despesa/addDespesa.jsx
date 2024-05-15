@@ -33,7 +33,7 @@ const AdicionarDespesaForm = () => {
 
     try {
         const token = localStorage.getItem('token');
-        const url = 'https://mdiniz-studio-production-3796.up.railway.app/api/despesas/adicionar';
+        const url = 'https://backend.controledegastos.app.br/api/despesas/adicionar';
         const response = await axios.post(url, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',

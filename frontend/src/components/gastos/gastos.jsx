@@ -22,10 +22,10 @@ const Gastos = () => {
             setLoading(true);
             try {
                 const [resDespesas, resEntradas] = await Promise.all([
-                    axios.get('https://mdiniz-studio-production-3796.up.railway.app/api/despesas/', {
+                    axios.get('https://backend.controledegastos.app.br/api/despesas/', {
                         headers: { Authorization: `Bearer ${token}` }
                     }),
-                    axios.get('https://mdiniz-studio-production-3796.up.railway.app/api/entradas/', {
+                    axios.get('https://backend.controledegastos.app.br/api/entradas/', {
                         headers: { Authorization: `Bearer ${token}` }
                     })
                 ]);
@@ -57,7 +57,7 @@ const Gastos = () => {
 
     const handleDelete = async (id, isDespesa = true) => {
         const token = localStorage.getItem('token');
-        const url = isDespesa ? `https://mdiniz-studio-production-3796.up.railway.app/api/despesas/despesa/${id}` : `https://mdiniz-studio-production-3796.up.railway.app/api/entradas/${id}`;
+        const url = isDespesa ? `https://backend.controledegastos.app.br/api/despesas/despesa/${id}` : `https://backend.controledegastos.app.br/api/entradas/${id}`;
         try {
             const response = await axios.delete(url, {
                 headers: { Authorization: `Bearer ${token}` }
@@ -92,7 +92,7 @@ const Gastos = () => {
           };
       
           // Faça a requisição e receba o Blob como resposta
-          const response = await axios.get('https://mdiniz-studio-production-3796.up.railway.app/api/despesas/pdf', config);
+          const response = await axios.get('https://backend.controledegastos.app.br/api/despesas/pdf', config);
       
           // Cria um URL para o blob
           const fileURL = window.URL.createObjectURL(new Blob([response.data]));
@@ -102,7 +102,7 @@ const Gastos = () => {
           document.body.appendChild(fileLink);
       
           // Trigger download
-          fileLink.click();
+          fileLink.click(); 
           fileLink.parentNode.removeChild(fileLink);
         } catch (error) {
           console.error('Erro ao exportar PDF:', error);
@@ -119,9 +119,9 @@ const Gastos = () => {
                         <table className="table">
                             <thead>
                                 <tr>
+                                    <th>Data</th>
                                     <th>Descrição</th>
                                     <th>Valor</th>
-                                    <th>Data</th>
                                     <th>Categoria</th>
                                     <th>Ação</th>
                                 </tr>
@@ -129,14 +129,15 @@ const Gastos = () => {
                             <tbody>
                                 {combinedData.map(item => (
                                     <tr key={item._id}>
-                                        <td>{item.descricao}</td>
-                                        <td>R$ {item.valor.toFixed(2)}</td>
                                         <td>{new Date(item.data).toLocaleDateString()}</td>
+                                        <td>{item.descricao}</td>
+                                        <td>{item.categoria !== 'Salário' ? '-R$' : '+R$' }{item.valor.toFixed(2)}</td>
                                         <td>{item.categoria}</td>
                                         <td className='buttons-despesa'>
-                                            <button onClick={() => handleDelete(item._id)} className="delete-button">❌</button>
+                                            <button onClick={() => handleDelete(item._id)} className="delete-button">{item.categoria !== 'Salário' ? '❌' : '' }</button>
                                             {item.comprovante && (
-                                                <button onClick={() => window.open(`https://mdiniz-studio-production-3796.up.railway.app/api/despesas/comprovante/${item._id}`, '_blank')} className="view-button delete-button">👁️</button>
+                                                <button onClick={() => window.open(`3
+                                                /api/despesas/comprovante/${item._id}`, '_blank')} className="view-button delete-button">👁️</button>
                                             )}
                                         </td>
                                     </tr>
