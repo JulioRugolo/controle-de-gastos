@@ -67,7 +67,7 @@ const AdicionarDespesaForm = () => {
 
   return (
     <div className="container mx-auto max-w-md px-4 py-8">
-      <h2 className="text-2xl font-bold mb-6 text-gray-800">Adicionar Despesa</h2>
+      <h2 className='page-title'>Adicionar Despesas</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label htmlFor="descricao" className="block text-sm font-medium text-gray-700">Descrição:</label>

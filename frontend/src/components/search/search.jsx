@@ -43,6 +43,7 @@ const BuscaPorNome = () => {
 
   return (
     <div className='search-container'>
+      <h2 className='page-title'>Buscar despesas</h2>
       <form onSubmit={handleSubmit}>
         <input
           type="text"

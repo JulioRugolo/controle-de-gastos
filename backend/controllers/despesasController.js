@@ -156,6 +156,7 @@ exports.gerarPDF = async (req, res) => {
     doc.moveDown(2);
 
     despesas.forEach(despesa => {
+      doc.addPage();
       if (despesa.comprovante) {
         const imageWidth = 300;
         const xPosition = (doc.page.width - imageWidth) / 2;
@@ -163,10 +164,7 @@ exports.gerarPDF = async (req, res) => {
         doc.image(Buffer.from(despesa.comprovante.data, 'base64'), xPosition, doc.y, {
           fit: [350, 400]
         });
-    
-        doc.addPage();
       }
-    
     });
     
     doc.pipe(res);

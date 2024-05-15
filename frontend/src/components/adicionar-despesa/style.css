@@ -1,7 +1,15 @@
 /* Estilos para dispositivos móveis */
 @media screen and (max-width: 767px) {
-    .container {
-      padding: 0 20px;
+
+    input[type="file"] {
+      display:flex;
+      flex-direction: column;
+      font-size: 12px;
+      margin-top: 20px;
+    }
+
+    .container form {
+      gap: 10px;
     }
     .mb-4 {
       margin-bottom: 1rem;

@@ -111,7 +111,7 @@ const Gastos = () => {
 
     return (
         <div>
-            <h2 className='gastos-title'>Gastos e Entradas</h2>
+            <h2 className='page-title gastos-title'>Gastos e Entradas</h2>
             {loading && <div className="loader"></div>}
             {!loading && (
                 <div>

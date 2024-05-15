@@ -1,13 +1,12 @@
 #root {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 100vh;
   text-align: center;
-  max-height: 100vh;
 }
 
 .nav-container {
-  background-color: #424242;
+  background-color: #064b9b;
   color: white;
   display: flex;
   position: fixed;
@@ -17,7 +16,7 @@
   width: 100%;
   gap: 1em;
   justify-content: center;
-  height: 100px;
+  height: 70px;
   align-items: center;
   border-radius: 0 0 10px 10px;
   box-shadow: #030303 0 0 10px;
@@ -67,20 +66,26 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: auto;
+  padding: 2px 10px;
+  margin-top: 100px;
 }
 
 .text-center h1 {
   font-size: 2em;
-margin-bottom: 1em;
-font-weight: 700;
+  margin-bottom: 1em;
+  font-weight: 700;
+}
+
+.text-center p {
+  margin-bottom: 1em;
+  text-align: justify;
 }
 
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
   }
-  to {
+  to { 
     transform: rotate(360deg);
   }
 }
@@ -92,12 +97,25 @@ font-weight: 700;
 }
 
 @media screen and (max-width: 767px) {
+  .mobile-nav {
+    display: none;
+  }
   .mobile-toggle {
     display: block; /* Mostra o botão em telas menores */
     position: fixed;
-    top: 30px;
+    top: 8px;
     left: 20px;
     z-index: 999;
+  }
+
+  .page-title {
+    font-size: 30px;
+    font-weight: 800;
+    margin-bottom: 30px;
+  }
+
+  .gastos-title {
+    margin-top: 30px;
   }
 
   .mobile-nav {
@@ -107,11 +125,15 @@ font-weight: 700;
     flex-direction: column;
     align-items: center;
     width: 100%;
-    padding-top: 80px;
-    height: 100vh;
-    background-color: #424242;
+    background-color: #064b9b;
     border-radius: 0 0 20px 20px;
     box-shadow: #030303 0 0 10px;
+  }
+
+
+  .mobile-nav a {
+    font-weight: 800;
+    font-size: 18px;
   }
 
   .mobile-nav.open {
@@ -124,7 +146,13 @@ font-weight: 700;
     color: #fff;
     text-decoration: none;
   }
+
+  a {
+    text-decoration: none;
+  }
 }
+
+
 
 .navbar {
   display: flex;

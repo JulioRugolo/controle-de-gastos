@@ -57,7 +57,7 @@ const AdicionarEntradaForm = () => {
 
   return (
     <div className="container mx-auto max-w-md px-4 py-8">
-      <h2 className="text-2xl font-bold mb-6 text-gray-800">Adicionar Entrada</h2>
+      <h2 className='page-title'>Adicionar Entradas</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label htmlFor="origem" className="block text-sm font-medium text-gray-700">Origem:</label>

@@ -6,9 +6,13 @@ a {
   font-weight: 500;
   color: #ffffff; /* Mudança para um tom de cinza mais suave para melhor legibilidade */
   text-decoration: inherit;
+  padding: 8px;
 }
 a:hover {
-  color: #2b6cb0; /* Um azul mais suave para hover */
+  color: #064b9b;
+  background-color: #e2e8f0; /* Um azul mais suave para hover */
+  padding: 8px;
+  border-radius: 10px;
 }
 
 body {
@@ -16,7 +20,6 @@ body {
   width: 100%;
   display: flex;
   min-width: 320px;
-  min-height: 100vh;
 }
 
 .toggle-mobile-box button {
