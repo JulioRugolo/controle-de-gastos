@@ -118,46 +118,57 @@ exports.gerarPDF = async (req, res) => {
     const fontBold = './fonts/Roboto-Bold.ttf';
 
     doc.fontSize(20).text('Relatório de Gastos e Entradas', { align: 'center' });
-    doc.moveDown(2);
+    doc.moveDown();
 
-    // Início da tabela de despesas
-    const tableTop = doc.y;
-    const columnWidths = [150, 100, 100, 150]; // Larguras das colunas
-    const rowHeight = 20; // Altura das linhas
+    despesas.forEach(despesa => {
+      doc.font(fontBold).fontSize(14);
+    
+      // Descrição
+      doc.text('Descrição: ', { continued: true });
+      doc.font(fontRegular).fontSize(14);
+      doc.text(despesa.descricao);
 
-    // Cabeçalhos da tabela
-    doc.font(fontBold);
-    ['Descrição', 'Valor', 'Data', 'Categoria'].forEach((header, i) => {
-      doc.text(header, 50 + i * columnWidths[i], tableTop, { width: columnWidths[i], align: 'center' });
+      // Valor
+      doc.moveDown(0.5);
+      doc.font(fontBold);
+      doc.text('Valor: ', { continued: true });
+      doc.font(fontRegular).text(`R$${despesa.valor.toFixed(2)}`, );
+    
+      // Data
+      doc.moveDown(0.5);
+      doc.font(fontBold);
+      doc.text('Data: ', { continued: true });
+      doc.font(fontRegular).text(despesa.data.toLocaleDateString(), );
+      
+      // Categoria
+      doc.moveDown(0.5);
+      doc.font(fontBold);
+      doc.text('Categoria: ', { continued: true });
+      doc.font(fontRegular).text(despesa.categoria, );
+      doc.moveDown(2);
+
     });
-
-    doc.font(fontRegular);
-    despesas.forEach((despesa, index) => {
-      let y = tableTop + (index + 1) * rowHeight;
-      doc.text(despesa.descricao, 50, y, { width: columnWidths[0], align: 'center' });
-      doc.text(`R$${despesa.valor.toFixed(2)}`, 50 + columnWidths[0], y, { width: columnWidths[1], align: 'center' });
-      doc.text(despesa.data.toLocaleDateString(), 50 + columnWidths[0] + columnWidths[1], y, { width: columnWidths[2], align: 'center' });
-      doc.text(despesa.categoria, 50 + columnWidths[0] + columnWidths[1] + columnWidths[2], y, { width: columnWidths[3], align: 'center' });
-    });
-
-    // Adicionando uma nova página para comprovantes
+    
     doc.addPage();
+
     doc.font(fontBold).fontSize(20);
     doc.text('Comprovantes', { align: 'center' });
     doc.moveDown(2);
 
-    // Renderizando comprovantes
     despesas.forEach(despesa => {
       if (despesa.comprovante) {
         const imageWidth = 300;
         const xPosition = (doc.page.width - imageWidth) / 2;
+    
         doc.image(Buffer.from(despesa.comprovante.data, 'base64'), xPosition, doc.y, {
           fit: [350, 400]
         });
+    
         doc.addPage();
       }
+    
     });
-
+    
     doc.pipe(res);
     doc.end();
   } catch (error) {
@@ -165,5 +176,4 @@ exports.gerarPDF = async (req, res) => {
     res.status(500).send('Erro interno ao gerar o PDF');
   }
 };
-
 
