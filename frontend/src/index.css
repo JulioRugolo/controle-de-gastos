@@ -7,16 +7,18 @@ a {
   color: #ffffff; /* Mudança para um tom de cinza mais suave para melhor legibilidade */
   text-decoration: inherit;
   padding: 8px;
+  border-radius: 10px;
 }
 a:hover {
   color: #064b9b;
+  font-weight: 500;
   background-color: #e2e8f0; /* Um azul mais suave para hover */
   padding: 8px;
   border-radius: 10px;
 }
 
 body {
-  margin: 0 auto;
+
   width: 100%;
   display: flex;
   min-width: 320px;

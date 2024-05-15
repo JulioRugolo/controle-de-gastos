@@ -3,6 +3,7 @@
   flex-direction: column;
   width: 100vh;
   text-align: center;
+  margin: 0 auto;
 }
 
 .nav-container {
@@ -132,20 +133,16 @@
 
 
   .mobile-nav a {
-    font-weight: 800;
-    font-size: 18px;
+    display: block;
+    padding: 8px;
+    color: #fff;
+    text-decoration: none;
   }
 
   .mobile-nav.open {
     transform: translateX(0) translateY(0); /* Move o menu para dentro da tela ao ser aberto */
   }
 
-  .mobile-nav a {
-    display: block;
-    padding: 1rem;
-    color: #fff;
-    text-decoration: none;
-  }
 
   a {
     text-decoration: none;
