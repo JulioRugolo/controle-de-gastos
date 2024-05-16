@@ -13,7 +13,7 @@ function LoginForm() {
   const handleLogin = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3000/api/users/login', {
+      const response = await axios.post('https://backend.controledegastos.app.br/api/users/login', {
         email: email.toUpperCase(),
         password
       });
