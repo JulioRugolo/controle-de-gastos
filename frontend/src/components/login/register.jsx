@@ -3,12 +3,15 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './login.css'; // Importar o arquivo CSS
 import Swal from 'sweetalert2';
+import Header from '../header/header';
 
 function RegisterForm() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false); // Estado para controlar a visibilidade da senha
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false); // Estado para controlar a visibilidade da confirmação de senha
   const navigate = useNavigate();
 
   const handleRegister = async (event) => {
@@ -51,8 +54,17 @@ function RegisterForm() {
     }
   };
 
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const toggleShowConfirmPassword = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  };
+
   return (
     <>
+    <Header user={''} />
       <div className='section'>
         <h1 className='page-title'>Registro</h1>
         <div className="form-container">
@@ -71,23 +83,33 @@ function RegisterForm() {
               placeholder="Email"
               required
             />
-            <input
-              type="password"
-              value={password}
-              onChange={e => setPassword(e.target.value)}
-              placeholder="Senha"
-              required
-            />
-            <input
-              type="password"
-              value={confirmPassword}
-              onChange={e => setConfirmPassword(e.target.value)}
-              placeholder="Confirme a Senha"
-              required
-            />
+            <div className="password-container">
+              <input
+                type={showPassword ? "text" : "password"}
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+                placeholder="Senha"
+                required
+              />
+              <span onClick={toggleShowPassword} className="show-password-icon">
+                <i className={showPassword ? "fas fa-eye" : "fas fa-eye-slash"}></i>
+              </span>
+            </div>
+            <div className="password-container">
+              <input
+                type={showConfirmPassword ? "text" : "password"}
+                value={confirmPassword}
+                onChange={e => setConfirmPassword(e.target.value)}
+                placeholder="Confirme a Senha"
+                required
+              />
+              <span onClick={toggleShowConfirmPassword} className="show-password-icon">
+                <i className={showConfirmPassword ? "fas fa-eye" : "fas fa-eye-slash"}></i>
+              </span>
+            </div>
             <button type="submit">Registrar</button>
           </form>
-          <p className='no-account'>Não tem uma conta? <a href='/login'>Login</a></p>
+          <p className='no-account'>Já tem uma conta? <a href='/login'>Login</a></p>
         </div>
       </div>
     </>

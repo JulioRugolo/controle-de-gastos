@@ -8,6 +8,7 @@ import Header from '../header/header';
 function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false); // Estado para controlar a visibilidade da senha
   const navigate = useNavigate();
 
   const handleLogin = async (event) => {
@@ -40,6 +41,10 @@ function LoginForm() {
     }
   };
 
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <>
       <Header user={''} />
@@ -54,13 +59,18 @@ function LoginForm() {
               placeholder="Email"
               required
             />
-            <input
-              type="password"
-              value={password}
-              onChange={e => setPassword(e.target.value)}
-              placeholder="Password"
-              required
-            />
+            <div className="password-container">
+              <input
+                type={showPassword ? "text" : "password"}
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+                placeholder="Password"
+                required
+              />
+              <span onClick={toggleShowPassword} className="show-password-icon">
+                <i className={showPassword ? "fas fa-eye" : "fas fa-eye-slash"}></i>
+              </span>
+            </div>
             <button type="submit">Login</button>
           </form>
           <p className='no-account'>Não tem uma conta? <a href='/register'>Registre-se</a></p>

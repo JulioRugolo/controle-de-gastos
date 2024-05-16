@@ -32,6 +32,14 @@ const AdicionarDespesaForm = () => {
         }
   }, [navigate]);
 
+  const clearForm = () => {
+    setDescricao('');
+    setValor('');
+    setData('');
+    setCategoria('');
+    setComprovante('');
+  };
+
   // Função para lidar com o envio do formulário
   const handleSubmit = async (event) => {
     const submitButton = document.getElementsByClassName('submit-button')[0];
@@ -83,6 +91,7 @@ const AdicionarDespesaForm = () => {
         submitButton.disabled = false;
         submitButton.textContent = 'Adicionar Despesa';
     }
+    clearForm();
 };
 
   return (

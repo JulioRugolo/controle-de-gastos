@@ -63,6 +63,36 @@
   background-color: darkblue;
 }
 
+.loader {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #3498db;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.no-data {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  height: 75vh;
+  width: 100%;
+  margin-top: 20px;
+
+}
+
 
 /* Estilos para responsividade */
 @media (max-width: 768px) {
@@ -107,6 +137,16 @@
       white-space: nowrap;
       text-align: left;
       font-weight: bold;
+  }
+
+  .no-data {
+    height: 25vh;
+    gap: 20px;
+  }
+
+  .no-data div {
+    display: flex;
+    flex-direction: column;
   }
 
   /* Títulos das colunas como 'data-label' nos elementos 'td' para visualização responsiva */

@@ -24,6 +24,13 @@ const AdicionarEntradaForm = () => {
         }
   }, [navigate]);
 
+  const clearForm = () => {
+    setDescricao('');
+    setValor('');
+    setData('');
+    setCategoria('');
+  };
+
   // Função para lidar com o envio do formulário
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -72,6 +79,7 @@ const AdicionarEntradaForm = () => {
       submitButton.disabled = false;
       submitButton.textContent = 'Adicionar Entrada';
     }
+    clearForm();
   };
 
   return (
