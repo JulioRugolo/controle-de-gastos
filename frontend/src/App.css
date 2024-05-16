@@ -4,6 +4,7 @@
   width: 100%;
   text-align: center;
   margin: 0 auto;
+  
 }
 
 .nav-container {
@@ -17,10 +18,10 @@
   width: 100%;
   gap: 1em;
   justify-content: center;
-  height: 70px;
+  height: 90px;
   align-items: center;
   border-radius: 0 0 10px 10px;
-  box-shadow: #030303 0 0 10px;
+
 }
 
 .mobile-nav {
@@ -110,7 +111,7 @@
   }
 
   .text-center {
-    margin-top: 20px;
+    margin-top: 30px;
   }
   .mobile-nav {
     display: none;
@@ -118,7 +119,7 @@
   .mobile-toggle {
     display: block; /* Mostra o botão em telas menores */
     position: fixed;
-    top: 8px;
+    top: 15px;
     left: 20px;
     z-index: 999;
   }
