@@ -149,6 +149,22 @@
     flex-direction: column;
   }
 
+  .overflow-x-auto {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 10px;
+    overflow-x: auto;
+  }
+
+  .loader {
+    top: 50%;
+    left: 45%;
+
+  }
+
   /* Títulos das colunas como 'data-label' nos elementos 'td' para visualização responsiva */
   .table td:nth-of-type(1):before { content: "Descrição"; }
   .table td:nth-of-type(2):before { content: "Valor"; }

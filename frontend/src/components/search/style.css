@@ -3,6 +3,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    width: 100vw;
     gap: 20px;
 }
 form {
@@ -15,7 +16,7 @@ form {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    width: 80%;
 }
 
 .result h2 {
@@ -32,4 +33,23 @@ form {
     align-items: center;
     justify-content: center;
     width: 100%;
+}
+
+@media screen and (max-width: 767px) {
+    .search-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100vw;
+        gap: 20px;
+    }
+    .table-responsive {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+    
 }
