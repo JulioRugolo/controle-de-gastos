@@ -27,3 +27,21 @@ exports.consultarEntradas = async (req, res) => {
       return res.status(500).json({ success: false, error: 'Erro interno do servidor' });
     }
   };
+
+// Controlador para excluir entrada
+exports.excluirEntrada = async (req, res) => {
+    try {
+      const { id } = req.params;
+      const quemGastou = req.user.id; // Corrigido para acessar req.user.id
+      const entrada = await Entrada.findOneAndDelete({ _id: id, quemGastou });
+  
+      if (!entrada) {
+        return res.status(404).json({ success: false, error: 'Entrada não encontrada' });
+      }
+  
+      return res.status(200).json({ success: true, data: entrada });
+    } catch (error) {
+      console.error('Erro ao excluir entrada:', error);
+      return res.status(500).json({ success: false, error: 'Erro interno do servidor' });
+    }
+  };
