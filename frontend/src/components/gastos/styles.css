@@ -26,7 +26,7 @@
 }
 
 .view-button {
-  background-color: green;
+  background-color: #064b9b;
   color: white;
   border: none;
   padding: 5px 10px;
@@ -36,7 +36,7 @@
 }
 
 .view-button:hover {
-  background-color: darkgreen;
+  background-color: #03254c;
 }
 
 .text-right {
