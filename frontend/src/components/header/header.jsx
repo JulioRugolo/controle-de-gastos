@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 import './header.css';
 import PropTypes from 'prop-types';
 
@@ -56,7 +57,7 @@ const Header = (props) => {
       <a href='/adicionar-despesa'>Adicionar Despesa</a>
       <a href='/adicionar-entrada'>Adicionar Entrada</a>
       <a href='/buscar'>Buscar Despesa</a>
-      {!loggedIn ? <a href='/login'>Login</a> : <a href='#' onClick={handleLogout}>Logout</a>}
+      {!loggedIn && <a href='/login'>Login</a>}
       {!loggedIn && <a href='/register'>Registrar</a>}
     </>
   );
@@ -72,7 +73,6 @@ const Header = (props) => {
           </button>
         </div>
       )}
-      {!navOpen && <p className='welcome'>{user ? `Olá, ${user}` : ''}</p>}
       {!isMobile && renderNavItems()}
       {isMobile && navOpen && (
         <>
@@ -81,6 +81,12 @@ const Header = (props) => {
           </ul>
         </>
       )}
+      {!navOpen && (
+    loggedIn && <div className="welcome-container">
+      <p className='welcome'>{user ? `Olá, ${user}` : ''}</p>
+      {user && <a className='welcome logout-button' href='#' onClick={handleLogout}><i className="fas fa-sign-out-alt"></i></a>}
+    </div>
+  )}
     </div>
   );
 };

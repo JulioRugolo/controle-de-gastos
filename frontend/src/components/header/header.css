@@ -17,13 +17,16 @@
       padding-left: 1rem;
       padding-right: 1rem;
     }
-    .welcome {
+    .welcome-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       position: fixed;
-      top: 30px;
-      right: 50px;
+      top: 25x;
+      right: 10px;
       font-size: 1em;
       font-weight: 500;
-      margin: 0 0 0 1em;
+      margin: 0 0 0 1em
     }
   }
   
@@ -33,13 +36,25 @@
     .lg\:hidden {
       display: block;
     }
+    .welcome-container {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 0.2em;
+    }
     .welcome {
-      position: fixed;
       top: 30px;
-      right: 400px;
-      font-size: 0.7em;
+      font-size: 0.6em;
       font-weight: 500;
       margin: 0 0 0 1em;
+    }
+    .logout-button {
+      margin: 0;
+      padding: 5px;
+    }
+    .logout-button:hover {
+      padding: 5px;
+      margin: 0;
     }
   }
   
