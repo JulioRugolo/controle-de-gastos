@@ -10,7 +10,7 @@ router.post('/adicionar', authenticateJWT, entradasController.adicionarEntrada);
 router.get('/', authenticateJWT, entradasController.consultarEntradas);
 
 // Rota para excluir entrada
-router.delete('/entrada/:id', entradasController.excluirEntrada);
+router.delete('/entrada/:id', authenticateJWT, entradasController.excluirEntrada);
 
 
 module.exports = router;
