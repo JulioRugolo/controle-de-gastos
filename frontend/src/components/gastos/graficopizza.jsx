@@ -17,10 +17,23 @@ const PieChartComponent = ({ data }) => {
   // Categorias a serem excluídas do gráfico de pizza
   const excludedCategories = ["Salário", "Freelance", "Investimento", "Presente"];
 
+  // Função para corrigir as categorias
+  const correctCategory = (categoria) => {
+    switch (categoria) {
+      case 'Carta':
+        return 'Cartão';
+      // Adicione outros casos de correção aqui, se necessário
+      default:
+        return categoria;
+    }
+  };
+
   // Agrupando os dados por categoria e somando os valores correspondentes
   const groupedData = data.reduce((acc, curr) => {
+    const categoriaCorrigida = correctCategory(curr.categoria);
+
     // Se a categoria for uma das excluídas, pular esta entrada
-    if (excludedCategories.includes(curr.categoria)) return acc;
+    if (excludedCategories.includes(categoriaCorrigida)) return acc;
 
     let value;
     if (typeof curr.valor === 'string') {
@@ -30,10 +43,10 @@ const PieChartComponent = ({ data }) => {
     }
     if (isNaN(value)) value = 0;
 
-    if (acc[curr.categoria]) {
-      acc[curr.categoria] += value;
+    if (acc[categoriaCorrigida]) {
+      acc[categoriaCorrigida] += value;
     } else {
-      acc[curr.categoria] = value;
+      acc[categoriaCorrigida] = value;
     }
     return acc;
   }, {});

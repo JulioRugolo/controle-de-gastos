@@ -14,7 +14,7 @@ const Gastos = () => {
 
     useEffect(() => {
         const token = localStorage.getItem('token');
-        if (!token && total === 0 || !token) {
+        if (!token) {
             navigate('/login');
             return;
         }
@@ -48,11 +48,11 @@ const Gastos = () => {
         };
 
         fetchData();
-    }, [navigate, total]);
+    }, [navigate]);
 
     const updateTotal = (despesas, entradas) => {
-        const totalDespesas = despesas.reduce((acc, curr) => acc + curr.valor, 0);
-        const totalEntradas = entradas.reduce((acc, curr) => acc + curr.valor, 0);
+        const totalDespesas = despesas.reduce((acc, curr) => acc + parseFloat(curr.valor), 0);
+        const totalEntradas = entradas.reduce((acc, curr) => acc + parseFloat(curr.valor), 0);
         setTotal(totalEntradas - totalDespesas);
     };
 
@@ -65,11 +65,14 @@ const Gastos = () => {
             });
             if (response.data.success) {
                 if (isDespesa) {
-                    setGastos(prev => prev.filter(item => item._id !== id));
+                    const updatedGastos = gastos.filter(item => item._id !== id);
+                    setGastos(updatedGastos);
+                    updateTotal(updatedGastos, entradas);
                 } else {
-                    setEntradas(prev => prev.filter(item => item._id !== id));
+                    const updatedEntradas = entradas.filter(item => item._id !== id);
+                    setEntradas(updatedEntradas);
+                    updateTotal(gastos, updatedEntradas);
                 }
-                updateTotal(isDespesa ? gastos.filter(item => item._id !== id) : gastos, isDespesa ? entradas : entradas.filter(item => item._id !== id));
             } else {
                 console.error('Erro ao excluir item:', response.data.error);
             }
@@ -122,8 +125,8 @@ const Gastos = () => {
                             <div className="no-data">
                                 <p>Não há despesas ou entradas registradas.</p>
                                 <div>
-                                    <button onClick={() => navigate('/add-despesa')} className="add-button">Adicionar Despesa</button>
-                                    <button onClick={() => navigate('/add-entrada')} className="add-button">Adicionar Entrada</button>
+                                    <button onClick={() => navigate('/adicionar-despesa')} className="add-button">Adicionar Despesa</button>
+                                    <button onClick={() => navigate('/adicionar-entrada')} className="add-button">Adicionar Entrada</button>
                                 </div>
                             </div>
                         ) : (
@@ -144,10 +147,10 @@ const Gastos = () => {
                                                 <tr key={item._id}>
                                                     <td>{new Date(item.data).toLocaleDateString()}</td>
                                                     <td>{item.descricao}</td>
-                                                    <td>{item.categoria !== 'Salário' ? '-R$' : '+R$' }{item.valor.toFixed(2)}</td>
-                                                    <td>{item.categoria}</td>
+                                                    <td>{['Salário', 'Freelance', 'Investimento', 'Presente'].includes(item.categoria) ? '+R$' : '-R$'}{parseFloat(item.valor).toFixed(2)}</td>
+                                                    <td>{item.categoria === 'Carta' ? "Cartão" : item.categoria}</td>
                                                     <td className='buttons-despesa'>
-                                                        <button onClick={() => handleDelete(item._id)} className="delete-button">{item.categoria !== 'Salário' ? '❌' : '' }</button>
+                                                        <button onClick={() => handleDelete(item._id, item.valor < 0)} className="delete-button">{item.valor < 0 ? '❌' : '' }</button>
                                                         {item.comprovante && (
                                                             <button onClick={() => window.open(`https://backend.controledegastos.app.br/api/despesas/comprovante/${item._id}`, '_blank')} className="view-button delete-button">👁️</button>
                                                         )}
