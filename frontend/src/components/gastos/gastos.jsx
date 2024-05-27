@@ -148,19 +148,16 @@ const Gastos = () => {
                                                     <td>{['Salário', 'Freelance', 'Investimento', 'Presente'].includes(item.categoria) ? '+R$' : '-R$'}{item.valor.toFixed(2)}</td>
                                                     <td>{item.categoria === 'Carta' ? "Cartão" : item.categoria}</td>
                                                     <td className='buttons-despesa'>
-                                                        {/* Botão de exclusão para despesas */}
-                                                        {item.categoria !== 'Salário' && (
-                                                            <button onClick={() => handleDelete(item._id, true)} className="delete-button">❌</button>
-                                                        )}
-                                                        {/* Botão de exclusão para entradas */}
-                                                        {['Salário', 'Freelance', 'Investimento', 'Presente'].includes(item.categoria) && (
-                                                            <button onClick={() => handleDelete(item._id, false)} className="delete-button">❌</button>
-                                                        )}
-                                                        {/* Botão de visualização do comprovante */}
+                                                        {/* Botão de exclusão */}
+                                                        <button onClick={() => handleDelete(item._id)} className={`delete-button ${!item.comprovante ? 'centered' : ''}`}>
+                                                            X
+                                                        </button>
+                                                        {/* Botão de visualização de comprovante */}
                                                         {item.comprovante && (
-                                                            <button onClick={() => window.open(`https://backend.controledegastos.app.br/api/despesas/comprovante/${item._id}`, '_blank')} className="view-button delete-button">👁️</button>
+                                                            <button onClick={() => window.open(`https://backend.controledegastos.app.br/api/despesas/comprovante/${item._id}`, '_blank')} className="view-button">👁️</button>
                                                         )}
                                                     </td>
+
                                                 </tr>
                                             ))}
                                         </tbody>

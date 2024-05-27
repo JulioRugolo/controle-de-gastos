@@ -8,35 +8,51 @@
 .table th, .table td {
   padding: 12px; /* Aumento do padding para melhor legibilidade */
   border: 1px solid #e2e8f0;
-  text-align: left; /* Alinhamento do texto */
+}
+
+.table thead tr {
+  text-align: center; /* Centraliza o texto horizontalmente */
+  background-color: #064b9b; /* Cor de fundo azul */
+  color: white; /* Cor do texto branco */
+  align-items: center; /* Centraliza verticalmente */
+  width: 100%;
+  justify-content: center;
 }
 
 /* Estilização dos botões */
-.delete-button {
-  background-color: rgb(255, 255, 255); /* Cor vermelha */
-  color: white;
+.delete-button,
+.view-button {
+  width: 40px; /* Define a largura fixa para os botões */
+  padding: 5px; /* Espaçamento interno dos botões */
   border: none;
-  padding: 5px 10px;
   cursor: pointer;
   border-radius: 5px; /* Bordas arredondadas */
 }
 
+.delete-button {
+  background-color: rgb(255, 0, 0);
+  color: white;
+  border-radius: 10px;
+}
+
 .delete-button:hover {
-  background-color: rgb(198, 47, 62); /* Cor mais escura no hover */
+  color: rgb(255, 255, 255);
+  background-color: rgb(125, 0, 0); /* Cor mais escura no hover */
+  box-shadow: black 0px 0px 5px; /* Sombra no hover */
+  border-radius: 10px;
 }
 
 .view-button {
-  background-color: #064b9b;
+  background-color: #064c9b73; /* Cor azul */
   color: white;
-  border: none;
-  padding: 5px 10px;
-  margin-left: 10px; /* Espaço entre botões */
-  cursor: pointer;
-  border-radius: 5px;
+  margin-left: 10px; /* Espaçamento entre os botões */
+  border-radius: 10px;
 }
 
 .view-button:hover {
-  background-color: #03254c;
+  background-color: #03254c; /* Cor mais escura no hover */
+  box-shadow: black 0px 0px 5px; /* Sombra no hover */
+  border-radius: 10px;
 }
 
 .text-right {
@@ -45,98 +61,73 @@
   margin-top: 20px;
 }
 
-.despesa-row {
-  background-color: #f8d7da; /* Cor de fundo para linhas de despesa */
-}
-
-.export-button {
-  padding: 10px;
-  margin-top: 20px;
-  background-color: blue;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.export-button:hover {
-  background-color: darkblue;
-}
-
-.loader {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border: 8px solid #f3f3f3;
-  border-top: 8px solid #3498db;
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  animation: spin 2s linear infinite;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-.no-data {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  font-weight: bold;
-  height: 75vh;
-  width: 100%;
-  margin-top: 20px;
-
-}
-
-
-/* Estilos para responsividade */
+/* Estilização para responsividade */
 @media (max-width: 768px) {
-
   .table {
     margin-top: 30px;
     display: block;
     overflow-x: auto; /* Adiciona barra de rolagem horizontal */
     white-space: nowrap; /* Evita quebra de linha */
-    
+    border-radius: 20px;
   }
+
   .table, .table thead, .table tbody, .table th, .table td, .table tr {
-      display: block;
+    display: block;
   }
 
   .table thead {
-      position: absolute;
-      top: -9999px;
-      left: -9999px;
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
   }
 
   .table tr { 
     border: 1px solid #ccc;
     margin-bottom: 20px;
-   }
+    border-radius: 20px;
+  }
 
   .table td {
-      border: none;
-      border-bottom: 1px solid #eee;
-      position: relative;
-      padding-left: 50%; /* Espaço para o título da coluna no modo responsivo */
-      text-align: right;
+    border: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 50%; /* Espaço para o título da coluna no modo responsivo */
+    padding-bottom: 0;
+    text-align: right;
   }
 
   .table td:before {
-      /* Títulos das colunas no modo responsivo */
-      position: absolute;
-      top: 6px;
-      left: 6px;
-      width: 45%;
-      padding-right: 10px;
-      white-space: nowrap;
-      text-align: left;
-      font-weight: bold;
+    /* Títulos das colunas no modo responsivo */
+    position: absolute;
+    top: 0px;
+    left: 1px;
+    width: 30%;
+    padding-right: 10px;
+    white-space: nowrap;
+    text-align: left;
+    font-weight: bold;
+    background-color: #064b9b; /* Cor de fundo azul */
+    padding: 10px;
+    color: white;
+    display: flex;
+    align-items: center;
+  }
+
+  .buttons-despesa {
+    display: flex;
+    justify-content: flex-start; /* Alinha os botões à esquerda */
+    width: auto; /* Define a largura automática para os botões */
+    padding: 0px; /* Espaçamento interno dos botões */
+    margin: 0;
+  }
+
+  .buttons-despesa button {
+    width: 40px; /* Define a largura fixa para os botões */
+    padding: 0px; /* Espaçamento interno dos botões */
+  }
+
+  .buttons-despesa .delete-button {
+    margin-right: 10px; /* Espaço entre os botões */
   }
 
   .no-data {
@@ -162,7 +153,6 @@
   .loader {
     top: 50%;
     left: 45%;
-
   }
 
   /* Títulos das colunas como 'data-label' nos elementos 'td' para visualização responsiva */
@@ -176,6 +166,19 @@
 /* Melhorias visuais para botões e texto */
 .buttons-despesa {
   display: flex;
-  justify-content: space-around;
-  padding: 10px 0;
+  align-items: center;
+  justify-content: flex-start; /* Alinha os botões à esquerda */
+  width: 100%;
+}
+
+.buttons-despesa button {
+  width: 40px; /* Define a largura fixa para os botões */
+}
+
+.buttons-despesa .delete-button {
+  margin-right: 10px; /* Espaço entre os botões */
+}
+
+.buttons-despesa .view-button {
+  justify-self: flex-end;
 }

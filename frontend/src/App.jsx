@@ -8,6 +8,7 @@ import Gastos from './components/gastos/gastos';
 import Search from './components/search/search';
 import Home from './components/home/home';
 import AdicionarEntradaForm from './components/adicionar-entrada/addEntrada';
+import DownloadPage from './components/download/download';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/buscar" element={<Search />} />
           <Route path="/adicionar-despesa" element={<AdicionarDespesaForm />} />
           <Route path="/adicionar-entrada" element={<AdicionarEntradaForm />} />
+          <Route path="/downloads" element={<DownloadPage />} />
           <Route path="/" element={<Home />} />
         </Routes>
       </div>
