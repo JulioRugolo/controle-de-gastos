@@ -77,12 +77,12 @@
     }
 
     .text-center {
-        position: fixed;
+        position: absolute;
         width: 100%;
         left: 0;
         right: 0;
         font-size: larger;
-        margin-top: 350px;
+        margin-top: 250px;
         background-color: white;
     }
     
