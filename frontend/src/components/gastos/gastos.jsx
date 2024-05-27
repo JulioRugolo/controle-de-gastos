@@ -14,7 +14,7 @@ const Gastos = () => {
 
     useEffect(() => {
         const token = localStorage.getItem('token');
-        if (!token) {
+        if (!token && total === 0 || !token) {
             navigate('/login');
             return;
         }
@@ -48,11 +48,11 @@ const Gastos = () => {
         };
 
         fetchData();
-    }, [navigate]);
+    }, [navigate, total]);
 
     const updateTotal = (despesas, entradas) => {
-        const totalDespesas = despesas.reduce((acc, curr) => acc + parseFloat(curr.valor), 0);
-        const totalEntradas = entradas.reduce((acc, curr) => acc + parseFloat(curr.valor), 0);
+        const totalDespesas = despesas.reduce((acc, curr) => acc + curr.valor, 0);
+        const totalEntradas = entradas.reduce((acc, curr) => acc + curr.valor, 0);
         setTotal(totalEntradas - totalDespesas);
     };
 
@@ -65,14 +65,11 @@ const Gastos = () => {
             });
             if (response.data.success) {
                 if (isDespesa) {
-                    const updatedGastos = gastos.filter(item => item._id !== id);
-                    setGastos(updatedGastos);
-                    updateTotal(updatedGastos, entradas);
+                    setGastos(prev => prev.filter(item => item._id !== id));
                 } else {
-                    const updatedEntradas = entradas.filter(item => item._id !== id);
-                    setEntradas(updatedEntradas);
-                    updateTotal(gastos, updatedEntradas);
+                    setEntradas(prev => prev.filter(item => item._id !== id));
                 }
+                updateTotal(isDespesa ? gastos.filter(item => item._id !== id) : gastos, isDespesa ? entradas : entradas.filter(item => item._id !== id));
             } else {
                 console.error('Erro ao excluir item:', response.data.error);
             }
@@ -147,10 +144,10 @@ const Gastos = () => {
                                                 <tr key={item._id}>
                                                     <td>{new Date(item.data).toLocaleDateString()}</td>
                                                     <td>{item.descricao}</td>
-                                                    <td>{['Salário', 'Freelance', 'Investimento', 'Presente'].includes(item.categoria) ? '+R$' : '-R$'}{parseFloat(item.valor).toFixed(2)}</td>
+                                                    <td>{['Salário', 'Freelance', 'Investimento', 'Presente'].includes(item.categoria) ? '+R$' : '-R$'}{item.valor.toFixed(2)}</td>
                                                     <td>{item.categoria === 'Carta' ? "Cartão" : item.categoria}</td>
                                                     <td className='buttons-despesa'>
-                                                        <button onClick={() => handleDelete(item._id, item.valor < 0)} className="delete-button">{item.valor < 0 ? '❌' : '' }</button>
+                                                        <button onClick={() => handleDelete(item._id)} className="delete-button">{item.categoria !== 'Salário' ? '❌' : '' }</button>
                                                         {item.comprovante && (
                                                             <button onClick={() => window.open(`https://backend.controledegastos.app.br/api/despesas/comprovante/${item._id}`, '_blank')} className="view-button delete-button">👁️</button>
                                                         )}
