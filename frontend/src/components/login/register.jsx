@@ -10,8 +10,6 @@ function RegisterForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false); // Estado para controlar a visibilidade da senha
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false); // Estado para controlar a visibilidade da confirmação de senha
   const navigate = useNavigate();
 
   const handleRegister = async (event) => {
@@ -54,14 +52,6 @@ function RegisterForm() {
     }
   };
 
-  const toggleShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
-
-  const toggleShowConfirmPassword = () => {
-    setShowConfirmPassword(!showConfirmPassword);
-  };
-
   return (
     <>
     <Header user={''} />
@@ -85,27 +75,21 @@ function RegisterForm() {
             />
             <div className="password-container">
               <input
-                type={showPassword ? "text" : "password"}
+                type={"password"}
                 value={password}
                 onChange={e => setPassword(e.target.value)}
                 placeholder="Senha"
                 required
               />
-              <span onClick={toggleShowPassword} className="show-password-icon">
-                <i className={showPassword ? "fas fa-eye" : "fas fa-eye-slash"}></i>
-              </span>
             </div>
             <div className="password-container">
               <input
-                type={showConfirmPassword ? "text" : "password"}
+                type={"password"}
                 value={confirmPassword}
                 onChange={e => setConfirmPassword(e.target.value)}
                 placeholder="Confirme a Senha"
                 required
               />
-              <span onClick={toggleShowConfirmPassword} className="show-password-icon">
-                <i className={showConfirmPassword ? "fas fa-eye" : "fas fa-eye-slash"}></i>
-              </span>
             </div>
             <button type="submit">Registrar</button>
           </form>

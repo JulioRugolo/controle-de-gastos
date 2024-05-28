@@ -67,9 +67,9 @@ function LoginForm() {
                 placeholder="Password"
                 required
               />
-              <span onClick={toggleShowPassword} className="show-password-icon">
+              {/* <span onClick={toggleShowPassword} className="show-password-icon">
                 <i className={showPassword ? "fas fa-eye" : "fas fa-eye-slash"}></i>
-              </span>
+              </span> */}
             </div>
             <button type="submit">Login</button>
           </form>

@@ -44,8 +44,9 @@
 
 @media (max-width: 768px) {
   .download-page {
+    height: auto;
     padding: 10px;
-    padding-top: 60px;
+    padding-top: 30px;
   }
 
   .download-container {
@@ -71,15 +72,17 @@
 
   .download-container p {
     font-size: 16px;
-    margin-bottom: 20px;
+    margin-bottom: 0;
   }
 
   .download-container ol {
     padding-left: 20px;
+    list-style-type: decimal;
+    text-align: left;
   }
 
   .download-container li {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     font-size: 16px;
   }
 
@@ -87,4 +90,8 @@
     max-width: 100%;
     height: auto;
   }
+
+  ol li {
+    margin-bottom: 0;
+  }	
 }

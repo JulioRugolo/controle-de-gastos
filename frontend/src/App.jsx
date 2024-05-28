@@ -11,6 +11,12 @@ import AdicionarEntradaForm from './components/adicionar-entrada/addEntrada';
 import DownloadPage from './components/download/download';
 
 function App() {
+
+  window.addEventListener('beforeunload', () => {
+    // Limpa o token do localStorage
+    localStorage.removeItem('token');
+  });
+  
   return (
     <Router>
       <div className="container">
