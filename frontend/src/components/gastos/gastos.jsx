@@ -4,6 +4,7 @@ import GraficoPizza from './graficopizza';
 import './styles.css';
 import { useNavigate } from 'react-router-dom';
 import Header from '../header/header';
+import Loader from '../loader/loader';
 
 const Gastos = () => {
     const [gastos, setGastos] = useState([]);
@@ -14,7 +15,7 @@ const Gastos = () => {
 
     useEffect(() => {
         const token = localStorage.getItem('token');
-        if (!token && total === 0 || !token) {
+        if (!token) {
             navigate('/login');
             return;
         }
@@ -48,7 +49,7 @@ const Gastos = () => {
         };
 
         fetchData();
-    }, [navigate, total]);
+    }, [navigate]);
 
     const updateTotal = (despesas, entradas) => {
         const totalDespesas = despesas.reduce((acc, curr) => acc + curr.valor, 0);
@@ -66,11 +67,14 @@ const Gastos = () => {
             });
             if (response.data.success) {
                 if (isDespesa) {
-                    setGastos(prev => prev.filter(item => item._id !== id));
+                    const updatedGastos = gastos.filter(item => item._id !== id);
+                    setGastos(updatedGastos);
+                    updateTotal(updatedGastos, entradas);
                 } else {
-                    setEntradas(prev => prev.filter(item => item._id !== id));
+                    const updatedEntradas = entradas.filter(item => item._id !== id);
+                    setEntradas(updatedEntradas);
+                    updateTotal(gastos, updatedEntradas);
                 }
-                updateTotal(isDespesa ? gastos.filter(item => item._id !== id) : gastos, isDespesa ? entradas : entradas.filter(item => item._id !== id));
             } else {
                 console.error('Erro ao excluir item:', response.data.error);
             }
@@ -78,34 +82,27 @@ const Gastos = () => {
             console.error('Erro ao excluir item:', error);
         }
     };
-    
-    
 
-    // Combina e ordena as entradas e gastos por data
     const combinedData = [...gastos, ...entradas].sort((a, b) => new Date(a.data) - new Date(b.data));
 
     const exportarPDF = async () => {
         const token = localStorage.getItem('token');
         try {
-            // Configuração para passar o token no header
             const config = {
                 headers: {
                     Authorization: `Bearer ${token}`
                 },
-                responseType: 'blob'  // Resposta esperada como um Blob para download direto
+                responseType: 'blob'
             };
 
-            // Faça a requisição e receba o Blob como resposta
             const response = await axios.get('https://backend.controledegastos.app.br/api/despesas/pdf', config);
 
-            // Cria um URL para o blob
             const fileURL = window.URL.createObjectURL(new Blob([response.data]));
             const fileLink = document.createElement('a');
             fileLink.href = fileURL;
             fileLink.setAttribute('download', 'Relatorio_Despesas.pdf');
             document.body.appendChild(fileLink);
 
-            // Trigger download
             fileLink.click();
             fileLink.parentNode.removeChild(fileLink);
         } catch (error) {
@@ -118,7 +115,7 @@ const Gastos = () => {
             <Header user={localStorage.getItem('user')} />
             <div className='section'>
                 <h2 className='page-title gastos-title'>Gastos e Entradas</h2>
-                {loading && <div className="loader"></div>}
+                {loading && <Loader />}  {/* Use o componente Loader aqui */}
                 {!loading && (
                     <>
                         {gastos.length === 0 && entradas.length === 0 ? (
@@ -150,15 +147,12 @@ const Gastos = () => {
                                                     <td>{['Salário', 'Freelance', 'Investimento', 'Presente'].includes(item.categoria) ? '+R$' : '-R$'}{item.valor.toFixed(2)}</td>
                                                     <td>{item.categoria === 'Carta' ? "Cartão" : item.categoria}</td>
                                                     <td className='buttons-despesa'>
-                                                        {/* Botão de exclusão para despesas */}
                                                         {item.categoria !== 'Salário' && (
                                                             <button onClick={() => handleDelete(item._id, true)} className="delete-button">❌</button>
                                                         )}
-                                                        {/* Botão de exclusão para entradas */}
                                                         {['Salário', 'Freelance', 'Investimento', 'Presente'].includes(item.categoria) && (
                                                             <button onClick={() => handleDelete(item._id, false)} className="delete-button">❌</button>
                                                         )}
-                                                        {/* Botão de visualização do comprovante */}
                                                         {item.comprovante && (
                                                             <button onClick={() => window.open(`https://backend.controledegastos.app.br/api/despesas/comprovante/${item._id}`, '_blank')} className="view-button delete-button">👁️</button>
                                                         )}
