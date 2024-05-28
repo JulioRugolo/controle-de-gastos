@@ -1,0 +1,17 @@
+{
+  "name": "instalador",
+  "version": "1.0.0",
+  "description": "Instalador do aplicativo Controle de Gastos",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^30.0.8",
+    "electron-builder": "^22.11.7"
+  }
+}
