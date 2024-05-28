@@ -1,6 +1,10 @@
 /* Estilos para dispositivos móveis */
 @media screen and (max-width: 767px) {
 
+  .input-container {
+    margin-bottom: 0.5rem;
+  }
+
     input[type="file"] {
       display:flex;
       flex-direction: column;
@@ -13,6 +17,8 @@
     }
 
     .container form {
+      margin-top: 20px;
+      width: 250px;
       gap: 10px;
     }
     .mb-4 {
@@ -71,9 +77,12 @@
   
   /* Estilos para dispositivos maiores que 767px (desktop) */
   @media screen and (min-width: 768px) {
-    .container {
-      /* margin: 0 auto */
-      
+    form {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      width: 300px;
+      gap: 10px;
     }
     .mb-4 {
       margin-bottom: 1.5rem;

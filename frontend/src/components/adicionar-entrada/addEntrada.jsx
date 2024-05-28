@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 // Importe o SweetAlert para mensagens de sucesso ou erro
 import Swal from 'sweetalert2';
-import './style.css';
+import '../adicionar-despesa/style.css';
 import { useNavigate } from 'react-router-dom';
 import Header from '../header/header';
 
@@ -88,20 +88,20 @@ const AdicionarEntradaForm = () => {
       <div className="section mx-auto max-w-md px-4 py-8">
         <h2 className='page-title'>Adicionar Entradas</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
+          <div className="input-container">
             <label htmlFor="origem" className="block text-sm font-medium text-gray-700">Descrição:</label>
             <input type="text" id="origem" name="origem" value={descricao} onChange={(e) => setDescricao(e.target.value)} className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" required />
           </div>
-          <div>
+          <div className="input-container">
             <label htmlFor="valor" className="block text-sm font-medium text-gray-700">Valor:</label>
             <input type="number" id="valor" name="valor" value={valor} onChange={(e) => setValor(e.target.value)} className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" required />
           </div>
-          <div>
+          <div className="input-container">
             <label htmlFor="data" className="block text-sm font-medium text-gray-700">Data:</label>
             <input type="date" id="data" name="data" value={data} onChange={(e) => setData(e.target.value)} className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" required />
           </div>
-          <div>
-            <label htmlFor="categoria" className="block text-sm font-medium text-gray-700">categoria:</label>
+          <div className="input-container">
+            <label htmlFor="categoria" className="block text-sm font-medium text-gray-700">Categoria:</label>
             <select id="categoria" name="categoria" value={categoria} onChange={(e) => setCategoria(e.target.value)} className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
               <option value="">Selecione um categoria</option>
               <option value="Salário">Salário</option>

@@ -148,10 +148,10 @@ const Gastos = () => {
                                                     <td>{item.categoria === 'Carta' ? "Cartão" : item.categoria}</td>
                                                     <td className='buttons-despesa'>
                                                         {item.categoria !== 'Salário' && (
-                                                            <button onClick={() => handleDelete(item._id, true)} className="delete-button">❌</button>
+                                                            <button onClick={() => handleDelete(item._id, true)} className="delete-button">X</button>
                                                         )}
                                                         {['Salário', 'Freelance', 'Investimento', 'Presente'].includes(item.categoria) && (
-                                                            <button onClick={() => handleDelete(item._id, false)} className="delete-button">❌</button>
+                                                            <button onClick={() => handleDelete(item._id, false)} className="delete-button">X</button>
                                                         )}
                                                         {item.comprovante && (
                                                             <button onClick={() => window.open(`https://backend.controledegastos.app.br/api/despesas/comprovante/${item._id}`, '_blank')} className="view-button delete-button">👁️</button>

@@ -51,19 +51,19 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #4a5568; /* Um cinza escuro para um visual mais suave */
+  background-color: #064b9b; /* Um cinza escuro para um visual mais suave */
   color: white;
   margin: 5px;
   cursor: pointer;
   transition: background-color 0.25s, border-color 0.25s; /* Adicionando transição ao background */
 }
 button:hover {
-  background-color: #2b6cb0; /* Mudança de cor em hover para um azul suave */
+  background-color: rgb(3, 54, 109); /* Mudança de cor em hover para um azul suave */
   border-color: #cbd5e0; /* Bordas em um cinza claro para destacar o botão em hover */
 }
 button:focus,
 button:focus-visible {
-  outline: 4px auto rgba(43, 108, 176, 0.5); /* Foco mais suave com cor semi-transparente */
+  outline: 4px auto rgb(3, 54, 109); /* Foco mais suave com cor semi-transparente */
 }
 
 input, select {

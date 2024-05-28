@@ -21,7 +21,7 @@ function App() {
           <Route path="/buscar" element={<Search />} />
           <Route path="/adicionar-despesa" element={<AdicionarDespesaForm />} />
           <Route path="/adicionar-entrada" element={<AdicionarEntradaForm />} />
-          <Route path="/downloads" element={<DownloadPage />} />
+          <Route path="/download" element={<DownloadPage />} />
           <Route path="/" element={<Home />} />
         </Routes>
       </div>

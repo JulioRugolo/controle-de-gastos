@@ -57,7 +57,7 @@ const Header = (props) => {
       <a href='/adicionar-despesa'>Adicionar Despesa</a>
       <a href='/adicionar-entrada'>Adicionar Entrada</a>
       <a href='/buscar'>Buscar Despesa</a>
-      <a href='/downloads'>Download</a>
+      <a href='/download'>Download</a>
       {!loggedIn && <a href='/login'>Login</a>}
       {!loggedIn && <a href='/register'>Registrar</a>}
     </>
