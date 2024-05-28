@@ -59,6 +59,7 @@ const Gastos = () => {
     const handleDelete = async (id, isDespesa = true) => {
         const token = localStorage.getItem('token');
         const url = isDespesa ? `https://backend.controledegastos.app.br/api/despesas/despesa/${id}` : `https://backend.controledegastos.app.br/api/entradas/entrada/${id}`;
+        console.log("Deleting URL:", url); // Verifica a URL
         try {
             const response = await axios.delete(url, {
                 headers: { Authorization: `Bearer ${token}` }
@@ -77,6 +78,7 @@ const Gastos = () => {
             console.error('Erro ao excluir item:', error);
         }
     };
+    
     
 
     // Combina e ordena as entradas e gastos por data
@@ -148,13 +150,17 @@ const Gastos = () => {
                                                     <td>{['Salário', 'Freelance', 'Investimento', 'Presente'].includes(item.categoria) ? '+R$' : '-R$'}{item.valor.toFixed(2)}</td>
                                                     <td>{item.categoria === 'Carta' ? "Cartão" : item.categoria}</td>
                                                     <td className='buttons-despesa'>
-                                                        {/* Botão de exclusão */}
-                                                        <button onClick={() => handleDelete(item._id)} className={`delete-button ${!item.comprovante ? 'centered' : ''}`}>
-                                                            X
-                                                        </button>
-                                                        {/* Botão de visualização de comprovante */}
+                                                        {/* Botão de exclusão para despesas */}
+                                                        {item.categoria !== 'Salário' && (
+                                                            <button onClick={() => handleDelete(item._id, true)} className="delete-button">❌</button>
+                                                        )}
+                                                        {/* Botão de exclusão para entradas */}
+                                                        {['Salário', 'Freelance', 'Investimento', 'Presente'].includes(item.categoria) && (
+                                                            <button onClick={() => handleDelete(item._id, false)} className="delete-button">❌</button>
+                                                        )}
+                                                        {/* Botão de visualização do comprovante */}
                                                         {item.comprovante && (
-                                                            <button onClick={() => window.open(`https://backend.controledegastos.app.br/api/despesas/comprovante/${item._id}`, '_blank')} className="view-button">👁️</button>
+                                                            <button onClick={() => window.open(`https://backend.controledegastos.app.br/api/despesas/comprovante/${item._id}`, '_blank')} className="view-button delete-button">👁️</button>
                                                         )}
                                                     </td>
 
