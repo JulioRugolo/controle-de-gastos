@@ -4,7 +4,7 @@ const userRoutes = require('./routes/userRoutes');
 const despesasRoutes = require('./routes/despesasRoutes');
 const entradasRoutes = require('./routes/entradasRoutes');
 const jwt = require('jsonwebtoken');
-require('dotenv').config(); // Certifique-se de carregar as variáveis de ambiente
+require('dotenv').config();
 const app = express();
 const port = process.env.PORT;
 const cors = require('cors');
@@ -18,7 +18,7 @@ mongoose.connect(process.env.DB, { useNewUrlParser: true, useUnifiedTopology: tr
 
 // Configuração de CORS
 app.use(cors({
-    origin: '*', // Permitir apenas requisições desta origem
+    origin: '*',
     credentials: true
 }));
 
